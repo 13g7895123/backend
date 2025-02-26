@@ -1,0 +1,34 @@
+ERROR - 2025-01-16 12:35:10 --> mysqli_sql_exception: Incorrect table definition; there can be only one auto column and it must be defined as a key in /var/www/system/Database/MySQLi/Connection.php:312
+Stack trace:
+#0 /var/www/system/Database/MySQLi/Connection.php(312): mysqli->query('CREATE TABLE `c...', 0)
+#1 /var/www/system/Database/BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('CREATE TABLE `c...')
+#2 /var/www/system/Database/BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE `c...')
+#3 /var/www/system/Database/Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE `c...')
+#4 /var/www/app/Database/Migrations/2025-01-16-000001_CreateFilesTable.php(57): CodeIgniter\Database\Forge->createTable('category_files')
+#5 /var/www/system/Database/MigrationRunner.php(866): App\Database\Migrations\CreateFilesTable->up()
+#6 /var/www/system/Database/MigrationRunner.php(182): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+#7 /var/www/system/Commands/Database/Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#8 /var/www/system/CLI/Commands.php(70): CodeIgniter\Commands\Database\Migrate->run(Array)
+#9 /var/www/system/CLI/Console.php(48): CodeIgniter\CLI\Commands->run('migrate', Array)
+#10 /var/www/system/Boot.php(360): CodeIgniter\CLI\Console->run()
+#11 /var/www/system/Boot.php(104): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#12 /var/www/spark(84): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#13 {main}
+ERROR - 2025-01-16 12:36:17 --> mysqli_sql_exception: Table 'files' already exists in /var/www/system/Database/MySQLi/Connection.php:312
+Stack trace:
+#0 /var/www/system/Database/MySQLi/Connection.php(312): mysqli->query('CREATE TABLE `f...', 0)
+#1 /var/www/system/Database/BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('CREATE TABLE `f...')
+#2 /var/www/system/Database/BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE `f...')
+#3 /var/www/system/Database/Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE `f...')
+#4 /var/www/app/Database/Migrations/2025-01-16-000001_CreateFilesTable.php(38): CodeIgniter\Database\Forge->createTable('files')
+#5 /var/www/system/Database/MigrationRunner.php(866): App\Database\Migrations\CreateFilesTable->up()
+#6 /var/www/system/Database/MigrationRunner.php(182): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+#7 /var/www/system/Commands/Database/Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#8 /var/www/system/CLI/Commands.php(70): CodeIgniter\Commands\Database\Migrate->run(Array)
+#9 /var/www/system/CLI/Console.php(48): CodeIgniter\CLI\Commands->run('migrate', Array)
+#10 /var/www/system/Boot.php(360): CodeIgniter\CLI\Console->run()
+#11 /var/www/system/Boot.php(104): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#12 /var/www/spark(84): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#13 {main}
+ERROR - 2025-01-16 14:27:32 --> Create category error: Failed to parse JSON string. Error: Syntax error
+ERROR - 2025-01-16 14:45:07 --> Create category error: Call to undefined method App\Models\Jiachu\M_File::insertFile

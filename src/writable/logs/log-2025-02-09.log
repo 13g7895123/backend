@@ -1,0 +1,855 @@
+CRITICAL - 2025-02-09 00:01:41 --> LogicException: No validation rules for the placeholder: "id". You must set the validation rules for the field. See <https://codeigniter4.github.io/userguide/libraries/validation.html#validation-placeholders>.
+[Method: PUT, Route: api/product/8]
+in SYSTEMPATH/Validation/Validation.php on line 805.
+ 1 SYSTEMPATH/Validation/Validation.php(157): CodeIgniter\Validation\Validation->fillPlaceholders([...], [...])
+ 2 SYSTEMPATH/BaseModel.php(1576): CodeIgniter\Validation\Validation->run([...], null, null)
+ 3 SYSTEMPATH/BaseModel.php(999): CodeIgniter\BaseModel->validate([...])
+ 4 SYSTEMPATH/Model.php(863): CodeIgniter\BaseModel->update([...], [...])
+ 5 APPPATH/Models/Jiachu/M_Product.php(90): CodeIgniter\Model->update('8', [...])
+ 6 APPPATH/Controllers/Jiachu/Product.php(81): App\Models\Jiachu\M_Product->updateData([...])
+ 7 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\Product->update('8')
+ 8 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\Product))
+ 9 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-02-09 01:03:18 --> Validation errors: Array
+(
+    [code] => 此代碼已被使用
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 01:03:30 --> Validation errors: Array
+(
+    [code] => 此代碼已被使用
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 01:07:06 --> Validation errors: Array
+(
+    [code] => 此代碼已被使用
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 11:11:03 --> mysqli_sql_exception: Column 'product_id' cannot be null in /var/www/system/Database/MySQLi/Connection.php:312
+Stack trace:
+#0 /var/www/system/Database/MySQLi/Connection.php(312): mysqli->query('INSERT INTO `pr...', 0)
+#1 /var/www/system/Database/BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `pr...')
+#2 /var/www/system/Database/BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `pr...')
+#3 /var/www/system/Database/BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `pr...', Array, false)
+#4 /var/www/app/Models/Jiachu/M_Product.php(126): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 /var/www/app/Controllers/Jiachu/FileController.php(32): App\Models\Jiachu\M_Product->setLinkFile(NULL, 35)
+#6 /var/www/system/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+#7 /var/www/system/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+#8 /var/www/system/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /var/www/system/Boot.php(334): CodeIgniter\CodeIgniter->run()
+#10 /var/www/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 /var/www/public/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2025-02-09 11:11:03 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'product_id' cannot be null
+[Method: POST, Route: api/file]
+in SYSTEMPATH/Database/BaseConnection.php on line 688.
+ 1 SYSTEMPATH/Database/BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `product_files` (`product_id`, `file_id`) VALUES (:product_id:, :file_id:)', [...], false)
+ 2 APPPATH/Models/Jiachu/M_Product.php(126): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH/Controllers/Jiachu/FileController.php(32): App\Models\Jiachu\M_Product->setLinkFile(null, 35)
+ 4 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+ 5 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+ 6 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-09 11:11:03 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'product_id' cannot be null
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 317.
+ 1 SYSTEMPATH/Database/BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `product_files` (`product_id`, `file_id`) VALUES (NULL, 35)')
+ 2 SYSTEMPATH/Database/BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `product_files` (`product_id`, `file_id`) VALUES (NULL, 35)')
+ 3 SYSTEMPATH/Database/BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `product_files` (`product_id`, `file_id`) VALUES (:product_id:, :file_id:)', [...], false)
+ 4 APPPATH/Models/Jiachu/M_Product.php(126): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 APPPATH/Controllers/Jiachu/FileController.php(32): App\Models\Jiachu\M_Product->setLinkFile(null, 35)
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+ 7 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+ 8 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-09 11:11:03 --> [Caused by] mysqli_sql_exception: Column 'product_id' cannot be null
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 312.
+ 1 SYSTEMPATH/Database/MySQLi/Connection.php(312): mysqli->query('INSERT INTO `product_files` (`product_id`, `file_id`) VALUES (NULL, 35)', 0)
+ 2 SYSTEMPATH/Database/BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `product_files` (`product_id`, `file_id`) VALUES (NULL, 35)')
+ 3 SYSTEMPATH/Database/BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `product_files` (`product_id`, `file_id`) VALUES (NULL, 35)')
+ 4 SYSTEMPATH/Database/BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `product_files` (`product_id`, `file_id`) VALUES (:product_id:, :file_id:)', [...], false)
+ 5 APPPATH/Models/Jiachu/M_Product.php(126): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH/Controllers/Jiachu/FileController.php(32): App\Models\Jiachu\M_Product->setLinkFile(null, 35)
+ 7 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+ 8 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+ 9 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-02-09 17:30:11 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 17:30:11 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 17:30:54 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 17:30:54 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 17:43:08 --> Validation errors: Array
+(
+    [name] => The name field must be at least 2 characters in length.
+)
+
+ERROR - 2025-02-09 18:05:39 --> Create category error: Undefined array key "category"
+ERROR - 2025-02-09 18:08:37 --> Create category error: Undefined array key "category"
+ERROR - 2025-02-09 18:10:23 --> Create category error: Undefined array key "category"
+ERROR - 2025-02-09 18:46:16 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:46:16 --> Create category error: Undefined array key "success"
+CRITICAL - 2025-02-09 18:50:52 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "42,http:"
+[Method: GET, Route: api/image/42,http:/jiachu-backend.com/api/image/43,http:/jiachu-backend.com/api/image/44,http:/jiachu-backend.com/api/image/45,http:/jiachu-backend.com/api/image/46,http:/jiachu-backend.com/api/image/47]
+in SYSTEMPATH/Router/Router.php on line 738.
+ 1 SYSTEMPATH/Router/Router.php(205): CodeIgniter\Router\Router->checkDisallowedChars('api/image/42,http:/jiachu-backend.com/api/image/43,http:/jiachu-backend.com/api/image/44,http:/jiachu-backend.com/api/image/45,http:/jiachu-backend.com/api/image/46,http:/jiachu-backend.com/api/image/47')
+ 2 SYSTEMPATH/CodeIgniter.php(834): CodeIgniter\Router\Router->handle('api/image/42,http:/jiachu-backend.com/api/image/43,http:/jiachu-backend.com/api/image/44,http:/jiachu-backend.com/api/image/45,http:/jiachu-backend.com/api/image/46,http:/jiachu-backend.com/api/image/47')
+ 3 SYSTEMPATH/CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-09 18:50:52 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "52,http:"
+[Method: GET, Route: api/image/52,http:/jiachu-backend.com/api/image/53]
+in SYSTEMPATH/Router/Router.php on line 738.
+ 1 SYSTEMPATH/Router/Router.php(205): CodeIgniter\Router\Router->checkDisallowedChars('api/image/52,http:/jiachu-backend.com/api/image/53')
+ 2 SYSTEMPATH/CodeIgniter.php(834): CodeIgniter\Router\Router->handle('api/image/52,http:/jiachu-backend.com/api/image/53')
+ 3 SYSTEMPATH/CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-09 18:50:52 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "38,http:"
+[Method: GET, Route: api/image/38,http:/jiachu-backend.com/api/image/39,http:/jiachu-backend.com/api/image/40,http:/jiachu-backend.com/api/image/41]
+in SYSTEMPATH/Router/Router.php on line 738.
+ 1 SYSTEMPATH/Router/Router.php(205): CodeIgniter\Router\Router->checkDisallowedChars('api/image/38,http:/jiachu-backend.com/api/image/39,http:/jiachu-backend.com/api/image/40,http:/jiachu-backend.com/api/image/41')
+ 2 SYSTEMPATH/CodeIgniter.php(834): CodeIgniter\Router\Router->handle('api/image/38,http:/jiachu-backend.com/api/image/39,http:/jiachu-backend.com/api/image/40,http:/jiachu-backend.com/api/image/41')
+ 3 SYSTEMPATH/CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-09 18:50:52 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "48,http:"
+[Method: GET, Route: api/image/48,http:/jiachu-backend.com/api/image/49,http:/jiachu-backend.com/api/image/50,http:/jiachu-backend.com/api/image/51]
+in SYSTEMPATH/Router/Router.php on line 738.
+ 1 SYSTEMPATH/Router/Router.php(205): CodeIgniter\Router\Router->checkDisallowedChars('api/image/48,http:/jiachu-backend.com/api/image/49,http:/jiachu-backend.com/api/image/50,http:/jiachu-backend.com/api/image/51')
+ 2 SYSTEMPATH/CodeIgniter.php(834): CodeIgniter\Router\Router->handle('api/image/48,http:/jiachu-backend.com/api/image/49,http:/jiachu-backend.com/api/image/50,http:/jiachu-backend.com/api/image/51')
+ 3 SYSTEMPATH/CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-02-09 18:50:54 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:50:54 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:56:51 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:56:51 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:58:10 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:58:10 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:58:11 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:58:11 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:58:12 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:58:12 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:58:13 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:58:13 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:58:14 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:58:14 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:58:15 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:58:15 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:58:16 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:58:16 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:58:17 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:58:17 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:58:18 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:58:18 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:58:19 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:58:19 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:58:27 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:58:27 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:58:28 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:58:28 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:58:29 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:58:29 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:58:30 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:58:30 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:58:31 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:58:31 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:59:21 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:59:21 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:59:35 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:59:35 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:59:36 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:59:36 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:59:37 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:59:37 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:59:51 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:59:51 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:59:52 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:59:52 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 18:59:53 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 18:59:53 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:02:11 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:02:11 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:02:12 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:02:12 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:02:21 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:02:21 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:02:40 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:02:40 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:10:36 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:10:36 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:11:19 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:11:19 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:11:27 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:11:27 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:12:49 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:12:49 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:20:52 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:20:52 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:20:53 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:20:53 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:20:54 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:20:54 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:02 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:02 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:03 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:03 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:04 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:04 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:05 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:05 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:06 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:06 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:07 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:07 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:08 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:08 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:09 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:09 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:10 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:10 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:11 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:11 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:12 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:12 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:20 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:20 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:22 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:22 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:24 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:24 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:25 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:25 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:33 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:33 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:34 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:34 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:35 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:35 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:36 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:36 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:51 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:51 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:52 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:52 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:54 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:54 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:55 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:55 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:56 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:56 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:57 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:57 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:58 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:58 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:21:59 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:21:59 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:00 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:00 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:07 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:07 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:08 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:08 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:09 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:09 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:10 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:10 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:11 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:11 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:12 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:12 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:13 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:13 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:14 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:14 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:15 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:15 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:16 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:16 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:17 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:17 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:18 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:18 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:19 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:19 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:20 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:20 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:21 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:21 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:22 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:22 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:23 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:23 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:24 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:24 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:25 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:25 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:26 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:26 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:27 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:27 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:28 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:28 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:29 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:29 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:30 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:30 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:31 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:31 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:32 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:32 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:33 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:33 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:34 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:34 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:34 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:34 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:35 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:35 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:36 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:36 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:37 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:37 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:38 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:38 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:39 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:39 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:41 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:41 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:42 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:42 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:43 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:43 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:44 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:44 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:45 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:45 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:46 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:46 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:47 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:47 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:48 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:48 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:22:56 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:22:56 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:23:01 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:23:01 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:23:02 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:23:02 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:23:10 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:23:10 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:23:11 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:23:11 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:23:12 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:23:12 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:23:13 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:23:13 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:23:28 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:23:28 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:23:43 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:23:43 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:23:44 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:23:44 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:23:45 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:23:45 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-09 19:23:46 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-09 19:23:46 --> Create category error: Undefined array key "success"

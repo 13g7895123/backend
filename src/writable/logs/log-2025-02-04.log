@@ -1,0 +1,124 @@
+CRITICAL - 2025-02-04 12:50:58 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "[object Object]"
+[Method: GET, Route: api/product/%5Bobject%20Object%5D]
+in SYSTEMPATH/Router/Router.php on line 738.
+ 1 SYSTEMPATH/Router/Router.php(205): CodeIgniter\Router\Router->checkDisallowedChars('api/product/[object Object]')
+ 2 SYSTEMPATH/CodeIgniter.php(834): CodeIgniter\Router\Router->handle('api/product/[object Object]')
+ 3 SYSTEMPATH/CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-04 12:50:59 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "[object Object]"
+[Method: GET, Route: api/product/%5Bobject%20Object%5D]
+in SYSTEMPATH/Router/Router.php on line 738.
+ 1 SYSTEMPATH/Router/Router.php(205): CodeIgniter\Router\Router->checkDisallowedChars('api/product/[object Object]')
+ 2 SYSTEMPATH/CodeIgniter.php(834): CodeIgniter\Router\Router->handle('api/product/[object Object]')
+ 3 SYSTEMPATH/CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-04 12:55:40 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "[object Object]"
+[Method: GET, Route: api/product/%5Bobject%20Object%5D]
+in SYSTEMPATH/Router/Router.php on line 738.
+ 1 SYSTEMPATH/Router/Router.php(205): CodeIgniter\Router\Router->checkDisallowedChars('api/product/[object Object]')
+ 2 SYSTEMPATH/CodeIgniter.php(834): CodeIgniter\Router\Router->handle('api/product/[object Object]')
+ 3 SYSTEMPATH/CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-04 12:55:41 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "[object Object]"
+[Method: GET, Route: api/product/%5Bobject%20Object%5D]
+in SYSTEMPATH/Router/Router.php on line 738.
+ 1 SYSTEMPATH/Router/Router.php(205): CodeIgniter\Router\Router->checkDisallowedChars('api/product/[object Object]')
+ 2 SYSTEMPATH/CodeIgniter.php(834): CodeIgniter\Router\Router->handle('api/product/[object Object]')
+ 3 SYSTEMPATH/CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-04 12:55:54 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "[object Object]"
+[Method: GET, Route: api/product/%5Bobject%20Object%5D]
+in SYSTEMPATH/Router/Router.php on line 738.
+ 1 SYSTEMPATH/Router/Router.php(205): CodeIgniter\Router\Router->checkDisallowedChars('api/product/[object Object]')
+ 2 SYSTEMPATH/CodeIgniter.php(834): CodeIgniter\Router\Router->handle('api/product/[object Object]')
+ 3 SYSTEMPATH/CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-04 12:55:54 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "[object Object]"
+[Method: GET, Route: api/product/%5Bobject%20Object%5D]
+in SYSTEMPATH/Router/Router.php on line 738.
+ 1 SYSTEMPATH/Router/Router.php(205): CodeIgniter\Router\Router->checkDisallowedChars('api/product/[object Object]')
+ 2 SYSTEMPATH/CodeIgniter.php(834): CodeIgniter\Router\Router->handle('api/product/[object Object]')
+ 3 SYSTEMPATH/CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-04 12:59:44 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "[object Object]"
+[Method: GET, Route: api/product/%5Bobject%20Object%5D]
+in SYSTEMPATH/Router/Router.php on line 738.
+ 1 SYSTEMPATH/Router/Router.php(205): CodeIgniter\Router\Router->checkDisallowedChars('api/product/[object Object]')
+ 2 SYSTEMPATH/CodeIgniter.php(834): CodeIgniter\Router\Router->handle('api/product/[object Object]')
+ 3 SYSTEMPATH/CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-04 12:59:44 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "[object Object]"
+[Method: GET, Route: api/product/%5Bobject%20Object%5D]
+in SYSTEMPATH/Router/Router.php on line 738.
+ 1 SYSTEMPATH/Router/Router.php(205): CodeIgniter\Router\Router->checkDisallowedChars('api/product/[object Object]')
+ 2 SYSTEMPATH/CodeIgniter.php(834): CodeIgniter\Router\Router->handle('api/product/[object Object]')
+ 3 SYSTEMPATH/CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-04 14:23:16 --> ErrorException: Trying to access array offset on value of type null
+[Method: GET, Route: api/product/6]
+in APPPATH/Models/Jiachu/M_Product.php on line 46.
+ 1 APPPATH/Models/Jiachu/M_Product.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', '/var/www/app/Models/Jiachu/M_Product.php', 46)
+ 2 APPPATH/Controllers/Jiachu/Product.php(33): App\Models\Jiachu\M_Product->getProductByCategoryId('6')
+ 3 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\Product->getProductByCategoryId('6')
+ 4 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\Product))
+ 5 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-04 14:23:17 --> ErrorException: Trying to access array offset on value of type null
+[Method: GET, Route: api/product/6]
+in APPPATH/Models/Jiachu/M_Product.php on line 46.
+ 1 APPPATH/Models/Jiachu/M_Product.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', '/var/www/app/Models/Jiachu/M_Product.php', 46)
+ 2 APPPATH/Controllers/Jiachu/Product.php(33): App\Models\Jiachu\M_Product->getProductByCategoryId('6')
+ 3 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\Product->getProductByCategoryId('6')
+ 4 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\Product))
+ 5 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-04 14:23:30 --> ErrorException: Trying to access array offset on value of type null
+[Method: GET, Route: api/product/6]
+in APPPATH/Models/Jiachu/M_Product.php on line 46.
+ 1 APPPATH/Models/Jiachu/M_Product.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', '/var/www/app/Models/Jiachu/M_Product.php', 46)
+ 2 APPPATH/Controllers/Jiachu/Product.php(33): App\Models\Jiachu\M_Product->getProductByCategoryId('6')
+ 3 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\Product->getProductByCategoryId('6')
+ 4 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\Product))
+ 5 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-04 14:23:31 --> ErrorException: Trying to access array offset on value of type null
+[Method: GET, Route: api/product/6]
+in APPPATH/Models/Jiachu/M_Product.php on line 46.
+ 1 APPPATH/Models/Jiachu/M_Product.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', '/var/www/app/Models/Jiachu/M_Product.php', 46)
+ 2 APPPATH/Controllers/Jiachu/Product.php(33): App\Models\Jiachu\M_Product->getProductByCategoryId('6')
+ 3 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\Product->getProductByCategoryId('6')
+ 4 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\Product))
+ 5 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

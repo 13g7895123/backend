@@ -1,0 +1,97 @@
+CRITICAL - 2025-02-12 14:31:05 --> TypeError: App\Models\Jiachu\M_File::saveFile(): Argument #1 ($file) must be of type object, null given, called in /var/www/app/Controllers/Jiachu/FileController.php on line 36
+[Method: POST, Route: api/file]
+in APPPATH/Models/Jiachu/M_File.php on line 26.
+ 1 APPPATH/Controllers/Jiachu/FileController.php(36): App\Models\Jiachu\M_File->saveFile(null, 'images')
+ 2 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+ 3 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-12 14:31:08 --> TypeError: App\Models\Jiachu\M_File::saveFile(): Argument #1 ($file) must be of type object, null given, called in /var/www/app/Controllers/Jiachu/FileController.php on line 36
+[Method: POST, Route: api/file]
+in APPPATH/Models/Jiachu/M_File.php on line 26.
+ 1 APPPATH/Controllers/Jiachu/FileController.php(36): App\Models\Jiachu\M_File->saveFile(null, 'images')
+ 2 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+ 3 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-12 14:31:11 --> TypeError: App\Models\Jiachu\M_File::saveFile(): Argument #1 ($file) must be of type object, null given, called in /var/www/app/Controllers/Jiachu/FileController.php on line 36
+[Method: POST, Route: api/file]
+in APPPATH/Models/Jiachu/M_File.php on line 26.
+ 1 APPPATH/Controllers/Jiachu/FileController.php(36): App\Models\Jiachu\M_File->saveFile(null, 'images')
+ 2 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+ 3 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-12 14:31:11 --> TypeError: App\Models\Jiachu\M_File::saveFile(): Argument #1 ($file) must be of type object, null given, called in /var/www/app/Controllers/Jiachu/FileController.php on line 36
+[Method: POST, Route: api/file]
+in APPPATH/Models/Jiachu/M_File.php on line 26.
+ 1 APPPATH/Controllers/Jiachu/FileController.php(36): App\Models\Jiachu\M_File->saveFile(null, 'images')
+ 2 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+ 3 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-12 14:31:12 --> TypeError: App\Models\Jiachu\M_File::saveFile(): Argument #1 ($file) must be of type object, null given, called in /var/www/app/Controllers/Jiachu/FileController.php on line 36
+[Method: POST, Route: api/file]
+in APPPATH/Models/Jiachu/M_File.php on line 26.
+ 1 APPPATH/Controllers/Jiachu/FileController.php(36): App\Models\Jiachu\M_File->saveFile(null, 'images')
+ 2 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+ 3 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-12 14:31:22 --> TypeError: App\Models\Jiachu\M_File::saveFile(): Argument #1 ($file) must be of type object, null given, called in /var/www/app/Controllers/Jiachu/FileController.php on line 36
+[Method: POST, Route: api/file]
+in APPPATH/Models/Jiachu/M_File.php on line 26.
+ 1 APPPATH/Controllers/Jiachu/FileController.php(36): App\Models\Jiachu\M_File->saveFile(null, 'images')
+ 2 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+ 3 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-12 14:31:31 --> TypeError: App\Models\Jiachu\M_File::saveFile(): Argument #1 ($file) must be of type object, null given, called in /var/www/app/Controllers/Jiachu/FileController.php on line 36
+[Method: POST, Route: api/file]
+in APPPATH/Models/Jiachu/M_File.php on line 26.
+ 1 APPPATH/Controllers/Jiachu/FileController.php(36): App\Models\Jiachu\M_File->saveFile(null, 'images')
+ 2 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+ 3 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-12 14:32:07 --> TypeError: App\Models\Jiachu\M_File::saveFile(): Argument #1 ($file) must be of type object, null given, called in /var/www/app/Controllers/Jiachu/FileController.php on line 36
+[Method: POST, Route: api/file]
+in APPPATH/Models/Jiachu/M_File.php on line 26.
+ 1 APPPATH/Controllers/Jiachu/FileController.php(36): App\Models\Jiachu\M_File->saveFile(null, 'images')
+ 2 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+ 3 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-02-12 14:33:28 --> Create category error: Undefined array key "sub_name"
+ERROR - 2025-02-12 14:33:57 --> Create category error: Undefined array key "sub_name"
+ERROR - 2025-02-12 14:33:59 --> Create category error: Undefined array key "sub_name"
+ERROR - 2025-02-12 14:33:59 --> Create category error: Undefined array key "sub_name"
+CRITICAL - 2025-02-12 19:03:48 --> TypeError: App\Models\Jiachu\M_File::saveFile(): Argument #1 ($file) must be of type object, null given, called in /var/www/app/Controllers/Jiachu/FileController.php on line 36
+[Method: POST, Route: api/file]
+in APPPATH/Models/Jiachu/M_File.php on line 26.
+ 1 APPPATH/Controllers/Jiachu/FileController.php(36): App\Models\Jiachu\M_File->saveFile(null, 'images')
+ 2 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+ 3 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-02-12 19:05:01 --> Create category error: Undefined array key "sub_name"
+ERROR - 2025-02-12 19:06:27 --> Create category error: Undefined array key "sub_name"
+ERROR - 2025-02-12 19:11:13 --> Create category error: Undefined array key "category_id"

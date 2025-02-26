@@ -1,0 +1,88 @@
+ERROR - 2025-02-03 13:07:30 --> mysqli_sql_exception: Table 'jiachu.product_file' doesn't exist in /var/www/system/Database/MySQLi/Connection.php:312
+Stack trace:
+#0 /var/www/system/Database/MySQLi/Connection.php(312): mysqli->query('INSERT INTO `pr...', 0)
+#1 /var/www/system/Database/BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `pr...')
+#2 /var/www/system/Database/BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `pr...')
+#3 /var/www/system/Database/BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `pr...', Array, false)
+#4 /var/www/app/Models/Jiachu/M_Product.php(68): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 /var/www/app/Controllers/Jiachu/FileController.php(31): App\Models\Jiachu\M_Product->setLinkFile(31, 31)
+#6 /var/www/system/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+#7 /var/www/system/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+#8 /var/www/system/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /var/www/system/Boot.php(334): CodeIgniter\CodeIgniter->run()
+#10 /var/www/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 /var/www/public/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2025-02-03 13:07:30 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'jiachu.product_file' doesn't exist
+[Method: POST, Route: api/file]
+in SYSTEMPATH/Database/BaseConnection.php on line 688.
+ 1 SYSTEMPATH/Database/BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `product_file` (`product_id`, `file_id`) VALUES (:product_id:, :file_id:)', [...], false)
+ 2 APPPATH/Models/Jiachu/M_Product.php(68): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH/Controllers/Jiachu/FileController.php(31): App\Models\Jiachu\M_Product->setLinkFile(31, 31)
+ 4 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+ 5 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+ 6 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-03 13:07:30 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'jiachu.product_file' doesn't exist
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 317.
+ 1 SYSTEMPATH/Database/BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `product_file` (`product_id`, `file_id`) VALUES (31, 31)')
+ 2 SYSTEMPATH/Database/BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `product_file` (`product_id`, `file_id`) VALUES (31, 31)')
+ 3 SYSTEMPATH/Database/BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `product_file` (`product_id`, `file_id`) VALUES (:product_id:, :file_id:)', [...], false)
+ 4 APPPATH/Models/Jiachu/M_Product.php(68): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 APPPATH/Controllers/Jiachu/FileController.php(31): App\Models\Jiachu\M_Product->setLinkFile(31, 31)
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+ 7 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+ 8 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-03 13:07:30 --> [Caused by] mysqli_sql_exception: Table 'jiachu.product_file' doesn't exist
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 312.
+ 1 SYSTEMPATH/Database/MySQLi/Connection.php(312): mysqli->query('INSERT INTO `product_file` (`product_id`, `file_id`) VALUES (31, 31)', 0)
+ 2 SYSTEMPATH/Database/BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `product_file` (`product_id`, `file_id`) VALUES (31, 31)')
+ 3 SYSTEMPATH/Database/BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `product_file` (`product_id`, `file_id`) VALUES (31, 31)')
+ 4 SYSTEMPATH/Database/BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `product_file` (`product_id`, `file_id`) VALUES (:product_id:, :file_id:)', [...], false)
+ 5 APPPATH/Models/Jiachu/M_Product.php(68): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH/Controllers/Jiachu/FileController.php(31): App\Models\Jiachu\M_Product->setLinkFile(31, 31)
+ 7 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+ 8 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+ 9 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-02-03 13:09:54 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-03 13:09:54 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-03 13:10:14 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-03 13:10:14 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-03 13:10:18 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-03 13:10:18 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-03 13:11:58 --> Validation errors: Array
+(
+    [name] => The name field must be at least 2 characters in length.
+)
+
+ERROR - 2025-02-03 13:12:10 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-02-03 13:12:10 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-03 13:14:41 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+

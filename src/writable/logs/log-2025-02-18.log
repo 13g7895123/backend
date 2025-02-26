@@ -1,0 +1,152 @@
+ERROR - 2025-02-18 22:49:42 --> mysqli_sql_exception: Table 'jiachu.files' doesn't exist in /var/www/system/Database/MySQLi/Connection.php:312
+Stack trace:
+#0 /var/www/system/Database/MySQLi/Connection.php(312): mysqli->query('SELECT *\nFROM `...', 0)
+#1 /var/www/system/Database/BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 /var/www/system/Database/BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 /var/www/system/Database/BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /var/www/system/Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 /var/www/system/BaseModel.php(713): CodeIgniter\Model->doFirst()
+#6 /var/www/app/Models/Jiachu/M_File.php(15): CodeIgniter\BaseModel->first()
+#7 /var/www/app/Controllers/Jiachu/ImageController.php(27): App\Models\Jiachu\M_File->getPath('225')
+#8 /var/www/system/CodeIgniter.php(933): App\Controllers\Jiachu\ImageController->show('225')
+#9 /var/www/system/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\ImageController))
+#10 /var/www/system/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 /var/www/system/Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 /var/www/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 /var/www/public/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2025-02-18 22:49:42 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'jiachu.files' doesn't exist
+[Method: GET, Route: api/image/225]
+in SYSTEMPATH/Database/BaseConnection.php on line 688.
+ 1 SYSTEMPATH/Database/BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `files`
+WHERE `id` = :id:
+ LIMIT 1', [...], false)
+ 2 SYSTEMPATH/Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH/BaseModel.php(713): CodeIgniter\Model->doFirst()
+ 4 APPPATH/Models/Jiachu/M_File.php(15): CodeIgniter\BaseModel->first()
+ 5 APPPATH/Controllers/Jiachu/ImageController.php(27): App\Models\Jiachu\M_File->getPath('225')
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\ImageController->show('225')
+ 7 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\ImageController))
+ 8 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-18 22:49:42 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'jiachu.files' doesn't exist
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 317.
+ 1 SYSTEMPATH/Database/BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `files`
+WHERE `id` = \'225\'
+ LIMIT 1')
+ 2 SYSTEMPATH/Database/BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `files`
+WHERE `id` = \'225\'
+ LIMIT 1')
+ 3 SYSTEMPATH/Database/BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `files`
+WHERE `id` = :id:
+ LIMIT 1', [...], false)
+ 4 SYSTEMPATH/Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH/BaseModel.php(713): CodeIgniter\Model->doFirst()
+ 6 APPPATH/Models/Jiachu/M_File.php(15): CodeIgniter\BaseModel->first()
+ 7 APPPATH/Controllers/Jiachu/ImageController.php(27): App\Models\Jiachu\M_File->getPath('225')
+ 8 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\ImageController->show('225')
+ 9 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\ImageController))
+10 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-18 22:49:42 --> [Caused by] mysqli_sql_exception: Table 'jiachu.files' doesn't exist
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 312.
+ 1 SYSTEMPATH/Database/MySQLi/Connection.php(312): mysqli->query('SELECT *
+FROM `files`
+WHERE `id` = \'225\'
+ LIMIT 1', 0)
+ 2 SYSTEMPATH/Database/BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `files`
+WHERE `id` = \'225\'
+ LIMIT 1')
+ 3 SYSTEMPATH/Database/BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `files`
+WHERE `id` = \'225\'
+ LIMIT 1')
+ 4 SYSTEMPATH/Database/BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `files`
+WHERE `id` = :id:
+ LIMIT 1', [...], false)
+ 5 SYSTEMPATH/Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH/BaseModel.php(713): CodeIgniter\Model->doFirst()
+ 7 APPPATH/Models/Jiachu/M_File.php(15): CodeIgniter\BaseModel->first()
+ 8 APPPATH/Controllers/Jiachu/ImageController.php(27): App\Models\Jiachu\M_File->getPath('225')
+ 9 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\ImageController->show('225')
+10 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\ImageController))
+11 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-02-18 22:49:59 --> mysqli_sql_exception: Table 'jiachu.category' doesn't exist in /var/www/system/Database/MySQLi/Connection.php:312
+Stack trace:
+#0 /var/www/system/Database/MySQLi/Connection.php(312): mysqli->query('SELECT *\nFROM `...', 0)
+#1 /var/www/system/Database/BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 /var/www/system/Database/BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 /var/www/system/Database/BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /var/www/system/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 /var/www/system/BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+#6 /var/www/app/Controllers/Jiachu/Category.php(33): CodeIgniter\BaseModel->findAll()
+#7 /var/www/system/CodeIgniter.php(933): App\Controllers\Jiachu\Category->index()
+#8 /var/www/system/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\Category))
+#9 /var/www/system/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /var/www/system/Boot.php(334): CodeIgniter\CodeIgniter->run()
+#11 /var/www/system/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 /var/www/public/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2025-02-18 22:49:59 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'jiachu.category' doesn't exist
+[Method: GET, Route: api/category]
+in SYSTEMPATH/Database/BaseConnection.php on line 688.
+ 1 SYSTEMPATH/Database/BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `category`', [], false)
+ 2 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH/BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH/Controllers/Jiachu/Category.php(33): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\Category->index()
+ 6 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\Category))
+ 7 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-18 22:49:59 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'jiachu.category' doesn't exist
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 317.
+ 1 SYSTEMPATH/Database/BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `category`')
+ 2 SYSTEMPATH/Database/BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `category`')
+ 3 SYSTEMPATH/Database/BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `category`', [], false)
+ 4 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH/BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH/Controllers/Jiachu/Category.php(33): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\Category->index()
+ 8 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\Category))
+ 9 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-18 22:49:59 --> [Caused by] mysqli_sql_exception: Table 'jiachu.category' doesn't exist
+in SYSTEMPATH/Database/MySQLi/Connection.php on line 312.
+ 1 SYSTEMPATH/Database/MySQLi/Connection.php(312): mysqli->query('SELECT *
+FROM `category`', 0)
+ 2 SYSTEMPATH/Database/BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `category`')
+ 3 SYSTEMPATH/Database/BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `category`')
+ 4 SYSTEMPATH/Database/BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `category`', [], false)
+ 5 SYSTEMPATH/Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH/BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH/Controllers/Jiachu/Category.php(33): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\Category->index()
+ 9 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\Category))
+10 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

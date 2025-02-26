@@ -1,0 +1,20 @@
+CRITICAL - 2025-02-05 12:41:22 --> Error: Class "App\Models\Jiachu\M_Token" not found
+[Method: POST, Route: api/login]
+in APPPATH/Controllers/Jiachu/User.php on line 21.
+ 1 SYSTEMPATH/CodeIgniter.php(903): App\Controllers\Jiachu\User->__construct()
+ 2 SYSTEMPATH/CodeIgniter.php(500): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-05 12:41:54 --> InvalidArgumentException: "promotion" is not a valid database connection group.
+[Method: POST, Route: api/login]
+in SYSTEMPATH/Database/Config.php on line 72.
+ 1 APPPATH/Models/Jiachu/M_Token.php(15): CodeIgniter\Database\Config::connect('promotion')
+ 2 APPPATH/Controllers/Jiachu/User.php(21): App\Models\Jiachu\M_Token->__construct()
+ 3 SYSTEMPATH/CodeIgniter.php(903): App\Controllers\Jiachu\User->__construct()
+ 4 SYSTEMPATH/CodeIgniter.php(500): CodeIgniter\CodeIgniter->createController()
+ 5 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

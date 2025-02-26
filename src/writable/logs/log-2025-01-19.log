@@ -1,0 +1,81 @@
+ERROR - 2025-01-19 02:35:12 --> Validation errors: Array
+(
+    [name] => The name field must be at least 2 characters in length.
+)
+
+ERROR - 2025-01-19 02:35:19 --> Create category error: Undefined array key "category_id"
+ERROR - 2025-01-19 02:36:14 --> Create category error: Undefined array key "category_id"
+ERROR - 2025-01-19 02:36:37 --> Create category error: Undefined array key "category_id"
+ERROR - 2025-01-19 03:10:58 --> Validation errors: Array
+(
+    [name] => The name field must be at least 2 characters in length.
+)
+
+ERROR - 2025-01-19 03:11:04 --> Validation errors: Array
+(
+    [name] => The name field must be at least 2 characters in length.
+)
+
+ERROR - 2025-01-19 03:11:10 --> Create category error: Undefined array key "category_id"
+ERROR - 2025-01-19 03:22:47 --> Create category error: Undefined array key "category_id"
+ERROR - 2025-01-19 03:23:05 --> Create category error: Undefined array key "category_id"
+ERROR - 2025-01-19 03:23:15 --> Create category error: Undefined array key "category_id"
+ERROR - 2025-01-19 03:23:50 --> Create category error: Undefined array key "category_id"
+ERROR - 2025-01-19 03:25:52 --> Create category error: Undefined array key "product_id"
+ERROR - 2025-01-19 03:27:26 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-01-19 03:27:26 --> Create category error: Undefined array key "success"
+ERROR - 2025-01-19 03:27:50 --> Validation errors: Array
+(
+    [name] => The name field must contain a unique value.
+)
+
+ERROR - 2025-01-19 11:59:04 --> Create category error: Undefined array key "category"
+ERROR - 2025-01-19 12:01:34 --> Create category error: Undefined array key "category"
+ERROR - 2025-01-19 12:04:25 --> Create category error: Undefined array key "category"
+ERROR - 2025-01-19 12:04:53 --> Create category error: Failed to parse JSON string. Error: Syntax error
+ERROR - 2025-01-19 12:05:08 --> Create category error: Failed to parse JSON string. Error: Syntax error
+ERROR - 2025-01-19 12:18:49 --> Create category error: Failed to parse JSON string. Error: Syntax error
+CRITICAL - 2025-01-19 13:14:34 --> TypeError: App\Models\Jiachu\M_File::saveFile(): Argument #1 ($file) must be of type object, null given, called in /var/www/app/Controllers/Jiachu/FileController.php on line 23
+[Method: POST, Route: api/file]
+in APPPATH/Models/Jiachu/M_File.php on line 22.
+ 1 APPPATH/Controllers/Jiachu/FileController.php(23): App\Models\Jiachu\M_File->saveFile(null, 'images')
+ 2 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+ 3 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-01-19 13:14:35 --> TypeError: App\Models\Jiachu\M_File::saveFile(): Argument #1 ($file) must be of type object, null given, called in /var/www/app/Controllers/Jiachu/FileController.php on line 23
+[Method: POST, Route: api/file]
+in APPPATH/Models/Jiachu/M_File.php on line 22.
+ 1 APPPATH/Controllers/Jiachu/FileController.php(23): App\Models\Jiachu\M_File->saveFile(null, 'images')
+ 2 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+ 3 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-01-19 13:15:49 --> TypeError: App\Models\Jiachu\M_File::saveFile(): Argument #1 ($file) must be of type object, null given, called in /var/www/app/Controllers/Jiachu/FileController.php on line 23
+[Method: POST, Route: api/file]
+in APPPATH/Models/Jiachu/M_File.php on line 22.
+ 1 APPPATH/Controllers/Jiachu/FileController.php(23): App\Models\Jiachu\M_File->saveFile(null, 'images')
+ 2 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+ 3 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-01-19 13:15:51 --> TypeError: App\Models\Jiachu\M_File::saveFile(): Argument #1 ($file) must be of type object, null given, called in /var/www/app/Controllers/Jiachu/FileController.php on line 23
+[Method: POST, Route: api/file]
+in APPPATH/Models/Jiachu/M_File.php on line 22.
+ 1 APPPATH/Controllers/Jiachu/FileController.php(23): App\Models\Jiachu\M_File->saveFile(null, 'images')
+ 2 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\FileController->upload()
+ 3 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\FileController))
+ 4 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

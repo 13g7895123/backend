@@ -1,0 +1,188 @@
+CRITICAL - 2025-02-08 20:03:27 --> ErrorException: Undefined array key "file_id"
+[Method: GET, Route: api/product/6]
+in APPPATH/Models/Jiachu/M_Product.php on line 46.
+ 1 APPPATH/Models/Jiachu/M_Product.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "file_id"', '/var/www/app/Models/Jiachu/M_Product.php', 46)
+ 2 APPPATH/Controllers/Jiachu/Product.php(33): App\Models\Jiachu\M_Product->getProductByCategoryId('6')
+ 3 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\Product->getProductByCategoryId('6')
+ 4 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\Product))
+ 5 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-08 20:03:28 --> ErrorException: Undefined array key "file_id"
+[Method: GET, Route: api/product/6]
+in APPPATH/Models/Jiachu/M_Product.php on line 46.
+ 1 APPPATH/Models/Jiachu/M_Product.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "file_id"', '/var/www/app/Models/Jiachu/M_Product.php', 46)
+ 2 APPPATH/Controllers/Jiachu/Product.php(33): App\Models\Jiachu\M_Product->getProductByCategoryId('6')
+ 3 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\Product->getProductByCategoryId('6')
+ 4 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\Product))
+ 5 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-08 20:08:04 --> ErrorException: Undefined array key "file_id"
+[Method: GET, Route: api/product/6]
+in APPPATH/Models/Jiachu/M_Product.php on line 47.
+ 1 APPPATH/Models/Jiachu/M_Product.php(47): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "file_id"', '/var/www/app/Models/Jiachu/M_Product.php', 47)
+ 2 APPPATH/Controllers/Jiachu/Product.php(33): App\Models\Jiachu\M_Product->getProductByCategoryId('6')
+ 3 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\Product->getProductByCategoryId('6')
+ 4 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\Product))
+ 5 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-08 20:08:05 --> ErrorException: Undefined array key "file_id"
+[Method: GET, Route: api/product/6]
+in APPPATH/Models/Jiachu/M_Product.php on line 47.
+ 1 APPPATH/Models/Jiachu/M_Product.php(47): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "file_id"', '/var/www/app/Models/Jiachu/M_Product.php', 47)
+ 2 APPPATH/Controllers/Jiachu/Product.php(33): App\Models\Jiachu\M_Product->getProductByCategoryId('6')
+ 3 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\Product->getProductByCategoryId('6')
+ 4 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\Product))
+ 5 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-08 20:08:24 --> ErrorException: Undefined array key "file_id"
+[Method: GET, Route: api/product/6]
+in APPPATH/Models/Jiachu/M_Product.php on line 48.
+ 1 APPPATH/Models/Jiachu/M_Product.php(48): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "file_id"', '/var/www/app/Models/Jiachu/M_Product.php', 48)
+ 2 APPPATH/Controllers/Jiachu/Product.php(33): App\Models\Jiachu\M_Product->getProductByCategoryId('6')
+ 3 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\Product->getProductByCategoryId('6')
+ 4 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\Product))
+ 5 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-08 20:08:25 --> ErrorException: Undefined array key "file_id"
+[Method: GET, Route: api/product/6]
+in APPPATH/Models/Jiachu/M_Product.php on line 48.
+ 1 APPPATH/Models/Jiachu/M_Product.php(48): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "file_id"', '/var/www/app/Models/Jiachu/M_Product.php', 48)
+ 2 APPPATH/Controllers/Jiachu/Product.php(33): App\Models\Jiachu\M_Product->getProductByCategoryId('6')
+ 3 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\Product->getProductByCategoryId('6')
+ 4 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\Product))
+ 5 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-08 20:08:46 --> ErrorException: Undefined array key "file_id"
+[Method: GET, Route: api/product/6]
+in APPPATH/Models/Jiachu/M_Product.php on line 48.
+ 1 APPPATH/Models/Jiachu/M_Product.php(48): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "file_id"', '/var/www/app/Models/Jiachu/M_Product.php', 48)
+ 2 APPPATH/Controllers/Jiachu/Product.php(33): App\Models\Jiachu\M_Product->getProductByCategoryId('6')
+ 3 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\Product->getProductByCategoryId('6')
+ 4 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\Product))
+ 5 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-08 20:08:47 --> ErrorException: Undefined array key "file_id"
+[Method: GET, Route: api/product/6]
+in APPPATH/Models/Jiachu/M_Product.php on line 48.
+ 1 APPPATH/Models/Jiachu/M_Product.php(48): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "file_id"', '/var/www/app/Models/Jiachu/M_Product.php', 48)
+ 2 APPPATH/Controllers/Jiachu/Product.php(33): App\Models\Jiachu\M_Product->getProductByCategoryId('6')
+ 3 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\Product->getProductByCategoryId('6')
+ 4 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\Product))
+ 5 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-08 20:09:37 --> ParseError: Unclosed '{' on line 32 does not match ')'
+[Method: GET, Route: api/product/6]
+in APPPATH/Models/Jiachu/M_Product.php on line 33.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(295): CodeIgniter\Autoloader\Autoloader->includeFile('/var/www/app/Models/Jiachu/M_Product.php')
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(271): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Models\\Jiachu\\M_Product')
+ 3 APPPATH/Controllers/Jiachu/Product.php(22): CodeIgniter\Autoloader\Autoloader->loadClass('App\\Models\\Jiachu\\M_Product')
+ 4 SYSTEMPATH/CodeIgniter.php(903): App\Controllers\Jiachu\Product->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(500): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-08 20:09:38 --> ParseError: Unclosed '{' on line 32 does not match ')'
+[Method: GET, Route: api/product/6]
+in APPPATH/Models/Jiachu/M_Product.php on line 33.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(295): CodeIgniter\Autoloader\Autoloader->includeFile('/var/www/app/Models/Jiachu/M_Product.php')
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(271): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Models\\Jiachu\\M_Product')
+ 3 APPPATH/Controllers/Jiachu/Product.php(22): CodeIgniter\Autoloader\Autoloader->loadClass('App\\Models\\Jiachu\\M_Product')
+ 4 SYSTEMPATH/CodeIgniter.php(903): App\Controllers\Jiachu\Product->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(500): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-08 20:10:07 --> ParseError: Unclosed '{' on line 32 does not match ')'
+[Method: GET, Route: api/product/6]
+in APPPATH/Models/Jiachu/M_Product.php on line 33.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(295): CodeIgniter\Autoloader\Autoloader->includeFile('/var/www/app/Models/Jiachu/M_Product.php')
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(271): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Models\\Jiachu\\M_Product')
+ 3 APPPATH/Controllers/Jiachu/Product.php(22): CodeIgniter\Autoloader\Autoloader->loadClass('App\\Models\\Jiachu\\M_Product')
+ 4 SYSTEMPATH/CodeIgniter.php(903): App\Controllers\Jiachu\Product->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(500): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-08 20:10:08 --> ParseError: Unclosed '{' on line 32 does not match ')'
+[Method: GET, Route: api/product/6]
+in APPPATH/Models/Jiachu/M_Product.php on line 33.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(295): CodeIgniter\Autoloader\Autoloader->includeFile('/var/www/app/Models/Jiachu/M_Product.php')
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(271): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Models\\Jiachu\\M_Product')
+ 3 APPPATH/Controllers/Jiachu/Product.php(22): CodeIgniter\Autoloader\Autoloader->loadClass('App\\Models\\Jiachu\\M_Product')
+ 4 SYSTEMPATH/CodeIgniter.php(903): App\Controllers\Jiachu\Product->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(500): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-08 20:10:26 --> ParseError: Unclosed '{' on line 32 does not match ')'
+[Method: GET, Route: api/product/6]
+in APPPATH/Models/Jiachu/M_Product.php on line 33.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(295): CodeIgniter\Autoloader\Autoloader->includeFile('/var/www/app/Models/Jiachu/M_Product.php')
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(271): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Models\\Jiachu\\M_Product')
+ 3 APPPATH/Controllers/Jiachu/Product.php(22): CodeIgniter\Autoloader\Autoloader->loadClass('App\\Models\\Jiachu\\M_Product')
+ 4 SYSTEMPATH/CodeIgniter.php(903): App\Controllers\Jiachu\Product->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(500): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-08 20:10:27 --> ParseError: Unclosed '{' on line 32 does not match ')'
+[Method: GET, Route: api/product/6]
+in APPPATH/Models/Jiachu/M_Product.php on line 33.
+ 1 SYSTEMPATH/Autoloader/Autoloader.php(295): CodeIgniter\Autoloader\Autoloader->includeFile('/var/www/app/Models/Jiachu/M_Product.php')
+ 2 SYSTEMPATH/Autoloader/Autoloader.php(271): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Models\\Jiachu\\M_Product')
+ 3 APPPATH/Controllers/Jiachu/Product.php(22): CodeIgniter\Autoloader\Autoloader->loadClass('App\\Models\\Jiachu\\M_Product')
+ 4 SYSTEMPATH/CodeIgniter.php(903): App\Controllers\Jiachu\Product->__construct()
+ 5 SYSTEMPATH/CodeIgniter.php(500): CodeIgniter\CodeIgniter->createController()
+ 6 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-08 20:10:47 --> ErrorException: Undefined array key "file_id"
+[Method: GET, Route: api/product/6]
+in APPPATH/Models/Jiachu/M_Product.php on line 48.
+ 1 APPPATH/Models/Jiachu/M_Product.php(48): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "file_id"', '/var/www/app/Models/Jiachu/M_Product.php', 48)
+ 2 APPPATH/Controllers/Jiachu/Product.php(33): App\Models\Jiachu\M_Product->getProductByCategoryId('6')
+ 3 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\Product->getProductByCategoryId('6')
+ 4 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\Product))
+ 5 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-02-08 20:10:48 --> ErrorException: Undefined array key "file_id"
+[Method: GET, Route: api/product/6]
+in APPPATH/Models/Jiachu/M_Product.php on line 48.
+ 1 APPPATH/Models/Jiachu/M_Product.php(48): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "file_id"', '/var/www/app/Models/Jiachu/M_Product.php', 48)
+ 2 APPPATH/Controllers/Jiachu/Product.php(33): App\Models\Jiachu\M_Product->getProductByCategoryId('6')
+ 3 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Jiachu\Product->getProductByCategoryId('6')
+ 4 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Jiachu\Product))
+ 5 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-02-08 23:38:27 --> Error creating product: No validation rules for the placeholder: "id". You must set the validation rules for the field. See <https://codeigniter4.github.io/userguide/libraries/validation.html#validation-placeholders>.
+ERROR - 2025-02-08 23:38:27 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-08 23:40:21 --> Error creating product: No validation rules for the placeholder: "id". You must set the validation rules for the field. See <https://codeigniter4.github.io/userguide/libraries/validation.html#validation-placeholders>.
+ERROR - 2025-02-08 23:40:21 --> Create category error: Undefined array key "success"
+ERROR - 2025-02-08 23:41:13 --> Error creating product: No validation rules for the placeholder: "id". You must set the validation rules for the field. See <https://codeigniter4.github.io/userguide/libraries/validation.html#validation-placeholders>.
+ERROR - 2025-02-08 23:41:13 --> Create category error: Undefined array key "success"
