@@ -40,7 +40,7 @@ class M_Player extends Model
      * @param int $userId 使用者ID
      * @return array
      */
-    public function getUserInfo($userId)
+    public function getPlayerInfo($userId)
     {
         $userData = $this->db->table('player')
             ->where('id', $userId)

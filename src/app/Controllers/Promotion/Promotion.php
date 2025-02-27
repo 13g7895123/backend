@@ -5,6 +5,7 @@ use App\Controllers\BaseController;
 use CodeIgniter\HTTP\Response;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\Promotion\M_Promotion;
+use App\Models\M_Common;
 
 class Promotion extends BaseController
 {
@@ -32,7 +33,11 @@ class Promotion extends BaseController
         $data = $this->M_Promotion->getData([], ['*', 'promotions.id'], True, $join);
 
         foreach ($data as $_key => $_val){
-            
+            unset($data[$_key]['password']);
+
+            $promotionDetail = $this->M_Common->getData('promotion_items', ['promotion_id' => $_val['id']], [], True);
+            print_r($promotionDetail); die();
+            $data[$_key]['promotion_detail'] = $promotionDetail;
         }
 
         return $this->response->setJSON($data);
