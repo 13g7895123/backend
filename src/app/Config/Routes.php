@@ -19,9 +19,13 @@ $routes->group('api', ['namespace' => 'App\Controllers\Jiachu'], function($route
         $routes->match(['post'], 'player/submit', 'Player::submit');        // 驗證頁提交資料
         $routes->match(['post'], 'player/info', 'Player::getPlayerInfo');         // 取得使用者資訊
 
+        $routes->match(['post'], 'player/submit', 'Player::submit');        // 驗證頁提交資料
+        $routes->match(['post'], 'player/info', 'Player::getPlayerInfo');         // 取得使用者資訊
+
         $routes->match(['get'], 'all', 'Promotion::index');                 // 取得推廣項目資料
         $routes->match(['get'], 'detail/(:num)', 'PromotionItem::index/$1');    // 取得推廣項目資料(id)
         $routes->match(['put'], 'detail/update/(:num)', 'PromotionItem::update/$1');    // 更新推廣項目資料
+        
         
         
         $routes->match(['post'], 'file', 'FileController::upload');         // 上傳檔案

@@ -68,12 +68,23 @@ class User extends BaseController
         return $this->response->setJSON($result);
     }
 
+    /**
+     * 取得使用者資料(透過條件查詢)
+     * 說明：後台使用者編輯使用，取得第一個使用者資料與對應伺服器權限
+     */
     public function condition()
     {
         $result = array('success' => False);
         $postData = $this->request->getJSON(True);
 
-        $data = $this->M_Model_Common->getData('user', $postData, []);
+        $data = $this->M_Model_Common->getData('users', $postData, []);
+        $permissionServer = $this->M_Model_Common->getData('user_server_permissions', ['user_id' => $postData['id']], [], True);
+
+        // 取得使用者對應伺服器權限
+        $data['server'] = (!empty($permissionServer)) ? array_column($permissionServer, 'server_code') : [];
+
+        // 移除密碼
+        unset($data['password']);
 
         $result['success'] = True;
         $result['msg'] = '查詢成功';

@@ -6,6 +6,7 @@ use CodeIgniter\HTTP\Response;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\Promotion\M_Promotion;
 use App\Models\M_Common;
+use App\Models\M_Common;
 
 class Promotion extends BaseController
 {
