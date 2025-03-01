@@ -16,12 +16,14 @@ $routes->group('api', ['namespace' => 'App\Controllers\Jiachu'], function($route
     $routes->group('promotion', ['namespace' => 'App\Controllers\Promotion'], function ($routes){
         // 前台
         $routes->match(['post'], 'server', 'Server::getServer');            // 取得伺服器資料
+        $routes->match(['post'], 'player/submit', 'Player::submit');        // 驗證頁提交資料
+        $routes->match(['post'], 'player/info', 'Player::getPlayerInfo');         // 取得使用者資訊
+
         $routes->match(['get'], 'all', 'Promotion::index');                 // 取得推廣項目資料
         $routes->match(['get'], 'detail/(:num)', 'PromotionItem::index/$1');    // 取得推廣項目資料(id)
         $routes->match(['put'], 'detail/update/(:num)', 'PromotionItem::update/$1');    // 更新推廣項目資料
         
-        $routes->match(['post'], 'user/submit', 'User::submit');                   // 提交資料
-        $routes->match(['post'], 'user/info', 'User::getUserInfo');         // 取得使用者資訊
+        
         $routes->match(['post'], 'file', 'FileController::upload');         // 上傳檔案
         $routes->match(['post'], '/', 'Promotion::create');                 // 建立推廣資料
         $routes->match(['delete'], '(:num)', 'Promotion::delete/$1');       // 刪除推廣資料

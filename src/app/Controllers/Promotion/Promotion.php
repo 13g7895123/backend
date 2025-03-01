@@ -5,26 +5,29 @@ use App\Controllers\BaseController;
 use CodeIgniter\HTTP\Response;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\Promotion\M_Promotion;
+use App\Models\M_Common;
 
 class Promotion extends BaseController
 {
     use ResponseTrait;
 
     public $M_Promotion;
+    public $M_Common;
 
     public function __construct()
     {
         // error_reporting(E_ALL);
         // ini_set('display_errors', 1);
 
-        $this->M_Promotion = new M_Promotion();
+        $this->M_Common = new M_Common();
+        $this->M_Promotion = new M_Promotion();        
     }
 
     public function index()
     {
         $join = array(
             array(
-                'table' => 'users',
+                'table' => 'player',
                 'field' => 'id',
                 'source_field' => 'user_id',
             ),
@@ -32,7 +35,24 @@ class Promotion extends BaseController
         $data = $this->M_Promotion->getData([], ['*', 'promotions.id'], True, $join);
 
         foreach ($data as $_key => $_val){
-            
+            unset($data[$_key]['password']);
+
+            $promotionDetail = $this->M_Common->getData('promotion_items', ['promotion_id' => $_val['id']], [], True);
+
+            $firstLink = $firstImage = '';
+            foreach ($promotionDetail as $d_key => $d_val){
+                // 取得第一個連結
+                if ($d_val['type'] == 'text' && $firstLink == ''){
+                    $firstLink = $d_val['content'];
+                }
+                // 取得第一個圖片
+                if ($d_val['type'] == 'image' && $firstImage == ''){
+                    $firstImage = $d_val['content'];
+                }
+            }
+
+            $data[$_key]['promotion_detail']['link'] = (isset($firstLink) && $firstLink != '') ? $firstLink : '';
+            $data[$_key]['promotion_detail']['image'] = (isset($firstImage) && $firstImage != '') ? $firstImage : '';
         }
 
         return $this->response->setJSON($data);
