@@ -90,20 +90,4 @@ class M_PromotionItem extends Model
 
         return $promotionItemData;
     }
-
-    /**
-     * 確認網址是否存在
-     * @param string $url
-     * @return void
-     */
-    public function checkUrl($url)
-    {
-        $data = $this->db->table('promotion_items')
-            ->where('type', 'text')
-            ->where('content', $url)
-            ->get()
-            ->getRowArray();            
-
-        return !empty($data) ? true : false;
-    }
 }

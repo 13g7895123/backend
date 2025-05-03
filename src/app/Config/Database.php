@@ -65,6 +65,41 @@ class Database extends Config
         'port'     => 9701,
     ];
 
+    // 娛樂城
+    public $casino = [
+        'DSN'      => '',
+        'hostname' => '139.162.15.125',
+        'username' => 'game_user',
+        'password' => 'v94176w6',
+        'database' => 'game-db',
+        'DBDriver' => 'MySQLi',
+        'DBPrefix' => '',
+        'pConnect' => false,
+        'DBDebug'  => (ENVIRONMENT !== 'production'),
+        'charset'  => 'utf8',
+        'DBCollat' => 'utf8_general_ci',
+        'swapPre'  => '',
+        'port'     => 9913,
+    ];
+
+    // 後台
+    public $admin = [
+        'DSN'      => '',
+        'hostname' => '139.162.15.125',
+        'username' => 'admin_user',
+        'password' => 'v94176w6',
+        'database' => 'admin-db',
+        'DBDriver' => 'MySQLi',
+        'DBPrefix' => '',
+        'pConnect' => false,
+        'DBDebug'  => (ENVIRONMENT !== 'production'),
+        'charset'  => 'utf8',
+        'DBCollat' => 'utf8_general_ci',
+        'swapPre'  => '',
+        'port'     => 9703,
+    ];
+    
+
     //    /**
     //     * Sample database connection for SQLite3.
     //     *

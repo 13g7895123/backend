@@ -77,6 +77,23 @@ class M_Player extends Model
     }
 
     /**
+     * 刪除使用者
+     * @param int $userId 使用者ID
+     */
+    public function deleteData($userId)
+    {
+        $builder = $this->db->table('player');
+
+        if (is_array($userId)){
+            $builder->whereIn('id', $userId);
+        } else {
+            $builder->where('id', $userId);
+        }
+
+        $builder->delete();
+    }
+
+    /**
      * 確認使用者資料
      */
     public function checkUser(array $data): array
@@ -148,7 +165,6 @@ class M_Player extends Model
         if ($notifyData['line']['status'] === True){
             $insertData['line'] = $notifyData['line']['data'];
         }
-        
     }
 
     /**
@@ -163,13 +179,55 @@ class M_Player extends Model
         // 載入Email
         $email = \Config\Services::email();
 
+        // $email->setDebug(true);
+        // $config = $email->initialize();
+        // var_dump($config);
+
+        // $email->SMTPKeepAlive = true; // 保持連線
+
+        // print_r(getenv('email.hostname')); die();
+
         // 設置Email
-        $email->setFrom('13g7895123@gmail.com', 'Promotion Test');
         $email->setTo($toEmail);
+        $email->setFrom(getenv('email.fromEmail'), getenv('email.fromName'));        
         $email->setSubject($subject);
         $email->setMessage($content);
+        $email->setHeader('Host', getenv('email.hostname'));
+        
+        // 紀錄Email
+        $this->mailLog($toEmail, $subject, $content, $email->printDebugger(['headers']));
 
-        // 寄送Email
-        return $email->send();
+        // 發送郵件並檢查是否成功
+        if ($email->send()) {
+            return "信件發送成功！";
+        } else {
+            // 顯示錯誤資訊
+            return "發送失敗：" . print_r($email->printDebugger(['headers']), true);
+        }
+    }
+
+    private function mailLog($toEmail, $subject, $content, $status)
+    {
+        $data = array(
+            'to_email' => $toEmail,
+            'subject' => $subject,
+            'content' => $content,
+            'status' => $status,
+        );
+
+        $builder = $this->db->table('mail_log');
+        $builder->insert($data);
+    }
+
+    public function fetchReward($serveCode=null)
+    {
+        $builder = $this->db->table('reward');
+
+        if ($serveCode !== null){
+            $builder->where('server', $serveCode);
+        }
+
+        $builder->orderBy('create_at', 'DESC');
+        return $builder->get()->getRowArray();
     }
 }

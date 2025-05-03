@@ -22,9 +22,9 @@ class FileController extends BaseController
     // 上傳檔案
     public function upload()
     {
-        $file = $this->request->getFile('file');
-        $fileId = $this->M_File->saveFile($file, 'images');
         $result = array('success' => False);
+        $file = $this->request->getFile('file');
+        $fileId = $this->M_File->saveFile($file, 'images/promotion');        
 
         if ($fileId === false) {
             $result['msg'] = '上傳失敗';
@@ -53,5 +53,27 @@ class FileController extends BaseController
         $this->response->noCache();
         $this->response->setContentType('application/json');
         return $this->response->setJSON($result);
+    }
+
+    /**
+     * 顯示檔案
+     * @param int $fileId
+     * @return void
+     */
+    public function show($fileId)
+    {
+        $fileData = $this->M_File->getPath($fileId);
+
+        $path = WRITEPATH . $fileData['path'];
+
+        if (!is_file($path)) {
+            return $this->response->setStatusCode(404)->setBody('File not found.');
+        }
+
+        $mimeType = mime_content_type($path);
+
+        return $this->response
+            ->setHeader('Content-Type', $mimeType)
+            ->setBody(file_get_contents($path));
     }
 }

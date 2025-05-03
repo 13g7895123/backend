@@ -28,7 +28,6 @@ class M_Line extends Model
     public function createData($data)
     {
         $this->db->table('line')->insert($data);
-        return $this->db->insertID();
     }
 
     /* 更新資料 */
@@ -43,10 +42,7 @@ class M_Line extends Model
     public function saveData($data)
     {
         // 取得Line資料
-        $condition = array(
-            'player_id' => $data['player_id'],
-            'uid' => $data['uid']
-        );
+        $condition = array('uid' => $data['uid']);
         $lineData = $this->getLineData($condition);
 
         // 轉換Array Key
@@ -54,16 +50,14 @@ class M_Line extends Model
         unset($data['image-url']);
 
         // 如果資料不存在，則新增資料
-        if (empty($lineData)){
-            $id = $this->createData($data);
-            return $id;
+        if ($lineData === False){
+            $this->createData($data);
         }
 
         // 如果資料存在，則更新資料
         $this->updateData($data['uid'], $data);
 
-        // 回傳已存在資料ID
-        return $lineData['id'];
+        return True;
     }
 
     /* 取得Line資料 */
@@ -95,7 +89,7 @@ class M_Line extends Model
 
     /* 接收Line Callback */
     // public function callback($state, $code, $userId, $token)
-    public function callback($state, $code, $friendshipStatusChanged = null)
+    public function callback($state, $code)
     {
         $result = array('success' => False);
 
@@ -119,14 +113,6 @@ class M_Line extends Model
 
         $frontendUrl = "{$domainUrl}/promotion/{$lineState['server']}/{$lineState['token']}";   // 導回前端
         $redirectUrl = $apiDomainUrl . '/api/promotion/line/callback';                          // Line導向路徑
-
-        // 已加入好友，直接導回結束後頁面
-        if ($friendshipStatusChanged !== null && $friendshipStatusChanged === false) {
-            $result['success'] = True;
-            $result['url'] = $frontendUrl;
-
-            return $result;
-        }
 
         // Line相關參數
         $lineCustomInfo = $config['line']['customInfo'];
@@ -164,17 +150,12 @@ class M_Line extends Model
         }
 
         // 儲存Line資訊
-        $lindId = $this->saveData($lineInfo);
+        $saveResult = $this->saveData($lineInfo);
 
-        if ($lindId === False){
+        if ($saveResult === False){
             $result['msg'] = '儲存Line資訊失敗';
             return $result;
         }
-
-        // 更新資料
-        $this->db->table('player')
-            ->where('id', $lineState['player_id'])
-            ->update(array('line_id' => $lindId));
 
         $result['success'] = True;
         $result['url'] = $frontendUrl;
@@ -200,6 +181,7 @@ class M_Line extends Model
         );
 
         // 呼叫 api
+        // $client = \Config\Services::curlrequest();
         $response = $client->post($this->tokenUrl, [
             'form_params' => $params,
         ]);
@@ -304,18 +286,18 @@ class M_Line extends Model
     {
         $config = array(
             'frontend' => array(
-                'linkMethod' => 'https',
-                'domain' => 'cs.pcgame.tw',
+                'linkMethod' => 'http',
+                'domain' => 'localhost:3000',
             ),
             'backend' => array(
                 'linkMethod' => 'https',
-                'domain' => 'backend.pcgame.tw',
+                'domain' => 'backend.mercylife.cc',
             ),            
             'line' => array(
                 'customInfo' => array(
-                    'clientId' => '2006388875',
-                    'clientSecret' => '3bb67d9cca0ed5a34b28c21ebbc27281',
-                    'channelAccessToken' => '0OLFZioGsoISKYxb1P8Aq2P1yTtS/MZU4/Hg4uoTRKR2hf/Uw40gJniI7uTeVMKtlG742jdWU105iRM09oR35tVuVH9owpDFpA6fuGNjmO+9ZTwYN/fTm+6qIYP3PwpfshllSxDQS+b+M/G6sGKXTAdB04t89/1O/w1cDnyilFU=',
+                    'clientId' => '2006270481',
+                    'clientSecret' => 'e5d008893d451d72ba01fa31554dece4',
+                    'channelAccessToken' => 'JrnbUor2y2Ja3EJj5Tapkk/0Z3Sn0k7IoI4jxjTuIdUBWRou5OOkRCgukcdWk/sefPoykYilJ46Jr6od60MEUQmeUQl/CoXSOXEZ/C44lygc03ia1KrQekbZe9PyHotc471mEngM4nroDj1O5URcTwdB04t89/1O/w1cDnyilFU=',
                 ),
                 'url' => array(
                     'base' => 'https://api.line.me',

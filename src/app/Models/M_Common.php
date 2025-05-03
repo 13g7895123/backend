@@ -50,14 +50,14 @@ class M_Common extends Model
 
         // 設置查詢聯結
         if (!empty($join)){
-            foreach ($join as $table => $on){
-                $builder->join($table, $on);
+            foreach ($join as $item){
+                $builder->join($item['table'], "{$item['table']}.{$item['field']} = {$table}.{$item['source_field']}");
             }
         }
 
         // 取得資料
-        $data = ($queryMultiple) ? $builder->get()->getResultArray() : $builder->get()->getRowArray();
-        
+        $data = ($queryMultiple === true) ? $builder->get()->getResultArray() : $builder->get()->getRowArray();
+
         return $data;
     }   
 

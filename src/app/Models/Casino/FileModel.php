@@ -1,38 +1,22 @@
 <?php
 
-namespace App\Models\Promotion;
-
+namespace App\Models\Casino;
 use CodeIgniter\Model;
+use App\Models\M_Common as M_Model_Common;
 
-class M_File extends Model
+class FileModel extends Model
 {
     protected $db;
-    protected $table      = 'files';
-    protected $primaryKey = 'id';
-    protected $useAutoIncrement = true;
-    protected $allowedFields = ['name', 'path', 'type', 'size', 'uploaded_at'];
+    protected $M_Model_Common;
 
     public function __construct()
     {
-        $this->db = \Config\Database::connect('promotion');  // 預設資料庫
-    }
-
-    /**
-     * 取得檔案路徑
-     * @param int $fileId
-     * @return array
-     */
-    public function getPath($fileId)
-    {
-        return $this->db->table('files')
-            ->where('id', $fileId)
-            ->get()
-            ->getRowArray();
+        $this->db = \Config\Database::connect('casino');  // 預設資料庫
+        $this->M_Model_Common = new M_Model_Common();
     }
 
     /**
      * 儲存檔案
-     *
      * @param object $file 檔案物件
      * @param string $path 檔案路徑
      * @param string $type 檔案類型
@@ -54,7 +38,7 @@ class M_File extends Model
             return false;
         }
 
-        $this->insert([
+        $this->db->table('files')->insert([
             'name'        => $file->getClientName(),
             'path'        => 'uploads/' . $path . '/' . $newName,
             'type'        => $file->getClientMimeType(),
@@ -62,6 +46,14 @@ class M_File extends Model
             'uploaded_at' => date('Y-m-d H:i:s'),
         ]);
 
-        return $this->getInsertID();
+        return $this->db->insertID();
+    }
+
+    public function fetchFile($fileId)
+    {
+        return $this->db->table('files')
+            ->where('id', $fileId)
+            ->get()
+            ->getRowArray();
     }
 }

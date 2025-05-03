@@ -9,6 +9,7 @@ use App\Models\Promotion\M_Token;
 use App\Models\Promotion\M_Promotion;
 use App\Models\Promotion\M_Server;
 use App\Models\Promotion\M_Line;
+use App\Models\Promotion\M_User;
 
 class Player extends BaseController
 {
@@ -21,6 +22,7 @@ class Player extends BaseController
     protected $M_Server;
     protected $M_Line;
     protected $M_Model_Common;
+    protected $M_User;
 
     public function __construct()
     {
@@ -32,6 +34,7 @@ class Player extends BaseController
         $this->M_Server = new M_Server();
         $this->M_Line = new M_Line();
         $this->M_Model_Common = new M_Model_Common();
+        $this->M_User = new M_User();
     }
 
     /**
@@ -40,15 +43,56 @@ class Player extends BaseController
     public function index()
     {
         $result = array('success' => False);
-        $data = $this->M_Model_Common->getData('player', [], [], True);
+        $postData = $this->request->getJSON(True);
+
+        // 權限查詢
+        $where = [];
+        if (isset($postData['user_id'])){
+            $userServerPermission = $this->M_User->getServerPermission($postData['user_id']);
+            if (!empty($userServerPermission)){
+                $where['server'] = array_column($userServerPermission, 'code');
+            }
+
+            // 管理者不適用
+            $userPermission = $this->M_User->getUserPermission($postData['user_id']);
+            if ($userPermission['type'] === 'admin'){
+                unset($where['server']);
+            }
+        }
+
+        $data = $this->M_Model_Common->getData('player', $where, [], True);
 
         if (empty($data)) {
             $result['msg'] = '查無資料';
         }
-        
+
+        foreach ($data as $_key => $_val) {
+            $data[$_key]['server_info'] = $this->M_Server->getServer(['code' => $_val['server']]);
+            $data[$_key]['line'] = $this->M_Model_Common->getData('line', ['player_id' => $_val['id']], [], False);
+
+            // 已推廣次數
+            $frequency = $data[$_key]['server_info']['cycle'];
+            $data[$_key]['promotion_count'] = $this->M_Promotion->getPromotionByFrequency($_val['id'], $frequency);
+        }
+
         $result['success'] = True;
         $result['msg'] = '查詢成功';
-        $result['data'] = $data;
+        $result['data'] = array_reverse($data);
+
+        $this->response->noCache();
+        $this->response->setContentType('application/json');
+        return $this->response->setJSON($result);
+    }
+
+    /**
+     * 刪除玩家資料
+     */
+    public function delete()
+    {
+        $postData = $this->request->getJSON(True);
+        $this->M_Player->deleteData($postData['id']);
+
+        $result = array('success' => True);
 
         $this->response->noCache();
         $this->response->setContentType('application/json');
@@ -128,7 +172,7 @@ class Player extends BaseController
 
         $userData = $this->M_Player->getPlayerInfo($tokenData['user_id']);
         $promotionData = $this->M_Promotion->getPromotion($tokenData['user_id']);
-        $lineData = $this->M_Line->getLineData(array('user_id' => $tokenData['user_id']));
+        $lineData = $this->M_Line->getLineData(array('player_id' => $tokenData['user_id']));
         $serverData = $this->M_Server->getServer(['code' => $tokenData['server']]);
 
         $result['success'] = True;
@@ -164,10 +208,56 @@ class Player extends BaseController
                 'max' => $serverData['limit_number'],
                 'cycle' => $serverData['cycle'],
             );
+            $result['server'] = $serverData;
         }
 
         $this->response->noCache();
         $this->response->setContentType('application/json');
         return $this->response->setJSON($result);
     }
+
+    /**
+     * 更新Line通知
+     */
+    public function updateLineNotify()
+    {
+        $postData = $this->request->getJSON(True);
+        $this->M_Player->updateLineNotify($postData['user'], $postData['server'], $postData['lineNotify']);
+
+        $result = array('success' => True);
+
+        $this->response->noCache();
+        $this->response->setContentType('application/json');
+        return $this->response->setJSON($result);
+    }
+
+    /**
+     * 儲存state
+     */
+    public function saveState()
+    {
+        $postData = $this->request->getJSON(True);
+        $this->M_Line->saveState($postData['state'], $postData['userId'], $postData['token']);
+
+        $result = array('success' => True);
+
+        $this->response->noCache();
+        $this->response->setContentType('application/json');
+        return $this->response->setJSON($result);
+    }
+
+    public function callback()
+    {
+        $getData = $this->request->getGet();
+        $result = $this->M_Line->callback($getData['state'], $getData['code']);
+
+        if ($result['success'] === False){
+            echo $result['msg'];
+            die();
+        }
+
+        header("Location: {$result['url']}");
+    }
+
+    
 }

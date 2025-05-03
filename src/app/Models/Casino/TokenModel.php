@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\Promotion;
+namespace App\Models\Casino;
 use CodeIgniter\Model;
 use App\Models\M_Common as M_Model_Common;
 
-class M_Token extends Model
+class TokenModel extends Model
 {
     protected $db;
     protected $table;
@@ -12,7 +12,7 @@ class M_Token extends Model
 
     public function __construct()
     {
-        $this->db = \Config\Database::connect('promotion');  // 預設資料庫
+        $this->db = \Config\Database::connect('casino');  // 預設資料庫
         $this->M_Model_Common = new M_Model_Common();
     }
 

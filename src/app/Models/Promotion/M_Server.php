@@ -26,12 +26,56 @@ class M_Server extends Model
         $builder = $this->db->table('server');
 
         if (!empty($where)){
-            $builder->where($where);
+            foreach ($where as $_key => $_val){
+                if (is_array($_val)){
+                    $builder->whereIn($_key, $_val);
+                    continue;
+                }
+
+                $builder->where($_key, $_val);
+            }
         }
 
         $data = ($queryMultiple) ? $builder->get()->getResultArray() : $builder->get()->getRowArray();
 
         return $data;
+    }
+
+    /**
+     * 刪除伺服器
+     */
+    public function deleteData($id)
+    {
+        // 伺服器資料
+        $server = $this->M_Model_Common->getData('server', ['id' => $id]);
+
+        if (empty($server)){
+            return false;
+        }
+
+        // 玩家資料
+        $this->db->table('player')
+            ->whereIn('server', [$server['code']])
+            ->delete();
+            
+        // 刪除推廣資料
+        $promotion = $this->M_Model_Common->getData('promotions', ['server' => $server['code']], [], true);
+        
+        if (!empty($promotion)){
+            foreach ($promotion as $_val){
+                $this->M_Promotion->deleteData($_val['id']);
+            }
+        }
+        
+        $this->db->table('server_image')
+            ->where('server_code', $server['code'])
+            ->delete();
+
+        $this->db->table('server')
+            ->where('id', $id)
+            ->delete();
+
+        return True;
     }
 
     /**
@@ -108,5 +152,170 @@ class M_Server extends Model
             'filtered' => $filteredRecords,
             'data' => $data
         ];
+    }
+
+    /**
+     * 確認資料庫資料是否存在
+     */
+    public function checkDatabase($serverCode)
+    {
+        $builder = $this->db->table('customized_db');
+        $builder->where('server_code', $serverCode);
+        $data = $builder->get()->getRowArray();
+
+        return (!empty($data)) ? True : False;
+    }
+
+    /**
+     * 更新資料庫資料
+     */
+    public function updateDatabase($data)
+    {
+        $updateData = $data;
+        unset($updateData['server_code']);
+
+        $builder = $this->db->table('customized_db');
+        $builder->where('server_code', $data['server_code']);
+        $builder->update($updateData);
+
+        return True;
+    }
+
+    /**
+     * 新增資料庫資料
+     */
+    public function insertDatabase($data)
+    {
+        $builder = $this->db->table('customized_db');
+        $builder->insert($data);
+
+        return True;
+    }
+
+    // 更新資料庫欄位資料
+    public function updateDatabaseField($data)
+    {
+        $fieldData = $this->db->table('customized_field')
+            ->where('server_code', $data['server_code'])
+            ->where('table_name', $data['table'])
+            ->get()
+            ->getResultArray();
+
+        // 先刪除資料
+        if (!empty($fieldData)){
+            $this->db->table('customized_field')
+            ->where('server_code', $data['server_code'])
+            ->delete();
+        }
+
+        // 再新增資料
+        foreach ($data['fields'] as $_val){
+            $insertData = array(
+                'server_code' => $data['server_code'],
+                'table_name' => $data['table'],
+                'field' => $_val['name'],
+                'value' => $_val['value'],
+            );
+            $this->db->table('customized_field')->insert($insertData);
+        }
+
+        return True;
+    }
+    /**
+     * 取得圖片
+     */
+    public function getImage($code, $type)
+    {
+        $data = $this->db->table('server_image')
+            ->where('server_code', $code)
+            ->where('type', $type)
+            ->get()
+            ->getResultArray();
+
+        return $data;
+    }
+
+    /**
+     * 新增圖片
+     */
+    public function createServerImage($data, $fileId)
+    {
+        $insertData = array(
+            'server_code' => $data['server_code'],
+            'type' => $data['type'],
+            'file_id' => $fileId,
+        );
+
+        $this->db->table('server_image')->insert($insertData);
+
+        return True;
+    }
+
+    /**
+     * 更新圖片
+     */
+    public function updateServerImage($data)
+    {
+        $updateData = array('is_selected' => 0);
+
+        $this->db->table('server_image')
+            ->where('server_code', $data['code'])
+            ->where('type', $data['type'])
+            ->update($updateData);
+
+        $updateData = array('is_selected' => 1);
+
+        $this->db->table('server_image')
+            ->where('server_code', $data['code'])
+            ->where('type', $data['type'])
+            ->where('file_id', $data['file_id'])
+            ->update($updateData);
+
+        return True;
+    }
+
+    /**
+     * 取得選取的圖片
+     */
+    public function getSelectedImage($code, $type)
+    {
+        $data = $this->db->table('server_image')
+            ->where('server_code', $code)
+            ->where('type', $type)
+            ->where('is_selected', 1)
+            ->get()
+            ->getRowArray();
+
+        return $data;
+    }
+
+    public function createDefaultImage($code, $type)
+    {
+        $insertData = array(
+            'server_code' => $code,
+            'type' => $type,
+            'is_selected' => 0,
+        );
+
+        $defaultImage = array(
+            'icon' => array(
+                'id' => array(12, 13, 14),
+                'default' => 12,
+            ),
+            'background' => array(
+                'id' => array(15, 16, 17, 18, 19, 20),
+                'default' => 20,
+            ),
+        );
+
+        foreach ($defaultImage[$type]['id'] as $_key => $_val){
+            // 設定預設圖片
+            $insertData['is_selected'] = ($_val == $defaultImage[$type]['default']) ? 1 : 0;
+
+            $insertData['file_id'] = $_val;
+            $this->db->table('server_image')->insert($insertData);
+        }
+
+        return True;
     }
 }

@@ -40,7 +40,14 @@ class User extends BaseController
     public function index()
     {
         $result = array('success' => False);
-        $data = $this->M_Model_Common->getData('users', ['type !=' => 'admin'], [], True);
+        $postData = $this->request->getJSON(True);
+
+        $where = array('type !=' => 'admin');
+        if (isset($postData['id'])){
+            $where['id'] = $postData['id'];
+        }
+
+        $data = $this->M_Model_Common->getData('users', $where, [], True);
 
         foreach ($data as $_key => $_val) {
             $data[$_key]['server'] = [];
@@ -58,6 +65,11 @@ class User extends BaseController
         foreach ($data as $_key => $_val) {
             unset($data[$_key]['password']);
         }
+
+        // 依建立時間排序
+        usort($data, function ($a, $b) {
+            return $b['created_at'] <=> $a['created_at'];
+        });
 
         $result['success'] = True;
         $result['msg'] = '查詢成功';
@@ -105,9 +117,59 @@ class User extends BaseController
 
         $userId = $this->M_User->create($postData);
 
-        $result['success'] = True;
+        if ($userId === 0) {
+            $result['msg'] = '帳號已被使用';
+            $this->response->noCache();
+            $this->response->setContentType('application/json');
+            return $this->response->setJSON($result);
+        }
+
+        $result['success'] = true;
         $result['msg'] = '新增成功';
         $result['user_id'] = $userId;
+
+        $this->response->noCache();
+        $this->response->setContentType('application/json');
+        return $this->response->setJSON($result);
+    }
+
+    /**
+     * 更新使用者
+     */
+    public function update()
+    {
+        $result = array('success' => False);
+        $postData = $this->request->getJSON(True);        
+
+        $userId = $this->M_User->updateData($postData);
+
+        $result['success'] = True;
+        $result['msg'] = '更新成功';
+
+        $this->response->noCache();
+        $this->response->setContentType('application/json');
+        return $this->response->setJSON($result);
+    }
+
+    /**
+     * 刪除使用者
+     */
+    public function delete()
+    {
+        $result = array('success' => False);
+        $postData = $this->request->getJSON(True);
+
+        $userId = $this->M_User->deleteData($postData['id']);
+
+        if ($userId === 0) {
+            $result['msg'] = '刪除失敗';
+            $this->response->noCache();
+            $this->response->setContentType('application/json');
+            return $this->response->setJSON($result);
+        }
+
+        $result['success'] = True;
+        $result['msg'] = '刪除成功';
 
         $this->response->noCache();
         $this->response->setContentType('application/json');
@@ -119,11 +181,56 @@ class User extends BaseController
      */
     public function getManager()
     {
-        $result = array('success' => False);
-        $data = $this->M_Model_Common->getData('users', ['type' => 'admin'], [], True);
+        $result = array(
+            'success' => false,
+            'logout' => false,
+        );
+        $authHeader = $this->request->getHeaderLine('Authorization');
+        $accessToken = '';
+
+        if (!empty($authHeader) && preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
+            $accessToken = $matches[1];
+        }
+
+        if (empty($accessToken) || $accessToken == '' || $accessToken == 'null') {
+            $result['msg'] = 'Token不存在';
+            $result['logout'] = true;
+
+            $this->response->noCache();
+            $this->response->setContentType('application/json');
+            return $this->response->setJSON($result);
+        }
+
+        $isExpired = $this->M_Token->checkAdminToken('access', $accessToken);
+
+        if ($isExpired === true){
+            $result['msg'] = 'Token已過期';
+            $result['logout'] = true;
+
+            $this->response->noCache();
+            $this->response->setContentType('application/json');
+            return $this->response->setJSON($result);
+        }
+
+        // 確認是否五分內過期，是的話要驗證refresh token，並重新取得access token
+        $isExpiredInFive = $this->M_Token->checkAdminToken('access', $accessToken, true);
+
+        if ($isExpiredInFive === true){
+            $newToken = $this->M_Token->fetchNewAccessToken($accessToken);
+
+            if ($newToken !== false){
+                $result['accessToken'] = $newToken;
+            }
+        }
+
+        $data = $this->M_Model_Common->getData('users', ['type' => 'admin'], [], true);
 
         if (empty($data)) {
             $result['msg'] = '查無資料';
+
+            $this->response->noCache();
+            $this->response->setContentType('application/json');
+            return $this->response->setJSON($result);
         }
 
         foreach ($data as $_key => $_val) {
@@ -133,6 +240,24 @@ class User extends BaseController
         $result['success'] = True;
         $result['msg'] = '查詢成功';
         $result['data'] = $data;
+
+        $this->response->noCache();
+        $this->response->setContentType('application/json');
+        return $this->response->setJSON($result);
+    }
+
+    /**
+     * 更新管理者
+     */
+    public function updateManager()
+    {
+        $result = array('success' => False);
+        $postData = $this->request->getJSON(True);        
+
+        $userId = $this->M_User->updateManager($postData);
+
+        $result['success'] = True;
+        $result['msg'] = '更新成功';
 
         $this->response->noCache();
         $this->response->setContentType('application/json');
@@ -292,41 +417,36 @@ class User extends BaseController
         return $this->response->setJSON($result);
     }
 
-    /**
-     * 更新Line通知
-     */
-    public function updateLineNotify()
+    public function login()
     {
+        $result = array('success' => False);
         $postData = $this->request->getJSON(True);
-        $this->M_User->updateLineNotify($postData['user'], $postData['server'], $postData['lineNotify']);
+        $loginResult = $this->M_User->login($postData['account'], $postData['password']);
 
-        $result = array('success' => True);
+        if ($loginResult['success'] === False) {
+            $result['msg'] = $loginResult['message'];
+
+            $this->response->noCache();
+            $this->response->setContentType('application/json');
+            return $this->response->setJSON($result);
+        }
+
+        $refreshTokenData = $this->M_Token->createAdminToken('refresh');
+        $accessTokenData = $this->M_Token->createAdminToken('access', $refreshTokenData[2]);
+
+        $result['success'] = True;
+        $result['msg'] = '登入成功';
+        $result['user'] = $loginResult['user'];
+        $result['token'] = array(
+            'access' => $accessTokenData[0],
+            'access_expired_at' => $accessTokenData[1],
+            'refresh' => $refreshTokenData[0],
+            'refresh_expired_at' => $refreshTokenData[1],
+        );
 
         $this->response->noCache();
         $this->response->setContentType('application/json');
         return $this->response->setJSON($result);
-    }
-
-    /**
-     * 儲存state
-     */
-    public function saveState()
-    {
-        $postData = $this->request->getJSON(True);
-        $this->M_Line->saveState($postData['state'], $postData['userId'], $postData['token']);
-    }
-
-    public function callback()
-    {
-        $getData = $this->request->getGet();
-        $result = $this->M_Line->callback($getData['state'], $getData['code']);
-
-        if ($result['success'] === False){
-            echo $result['msg'];
-            die();
-        }
-
-        header("Location: {$result['url']}");
     }
 
     public function test()
