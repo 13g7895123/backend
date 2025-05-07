@@ -71,7 +71,8 @@ $routes->group('api', function($routes) {
     // 娛樂城
     $routes->group('casino', ['namespace' => 'App\Controllers\Casino'], function ($routes){
 
-        $routes->match(['get'], "image/upload", 'Article::uploadImage');
+        $routes->match(['get'], "image/upload", 'FileController::upload');
+        $routes->match(['get'], "image/show/(:num)", 'FileController::show/$1');
 
         // 後台
         $routes->group('admin', function ($routes){
@@ -115,6 +116,29 @@ $routes->group('api', function($routes) {
                 $routes->match(['post'], "/", 'Article::create');
                 $routes->match(['post'], "image/upload", 'Article::uploadImage');
                 $routes->match(['get'], "image/show/(:num)", 'Article::showFile/$1');
+                $routes->match(['post'], "search", 'Article::search');
+            });
+
+            // 體育比分
+            $routes->group('sports-scores', function ($routes){
+                $routes->match(['get'], "/", 'SportsScores::index');            // 列表
+                $routes->match(['get'], "(:num)", 'SportsScores::index/$1');    // 單筆查詢
+                $routes->match(['post'], "/", 'SportsScores::create');          // 新增
+                $routes->match(['post'], "update", 'SportsScores::update');     // 更新
+                $routes->match(['post'], "delete", 'SportsScores::delete');     // 刪除
+                $routes->match(['post'], "upload", 'SportsScores::upload');     // 上傳
+                $routes->match(['post'], "sort", 'SportsScores::sort');         // 排序
+            });
+
+            // 彩票彩球
+            $routes->group('lottery-draw', function ($routes){
+                $routes->match(['get'], "/", 'LotteryDraw::index');            // 列表
+                $routes->match(['get'], "(:num)", 'LotteryDraw::index/$1');    // 單筆查詢
+                $routes->match(['post'], "/", 'LotteryDraw::create');          // 新增
+                $routes->match(['post'], "update", 'LotteryDraw::update');     // 更新
+                $routes->match(['post'], "delete", 'LotteryDraw::delete');     // 刪除
+                $routes->match(['post'], "upload", 'LotteryDraw::upload');     // 上傳
+                $routes->match(['post'], "sort", 'LotteryDraw::sort');         // 排序
             });
         });
     });

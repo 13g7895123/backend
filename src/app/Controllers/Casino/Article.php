@@ -102,11 +102,11 @@ class Article extends BaseController
         $articleData = $articleModel->fetchArticle($articleId);
 
         $result['success'] = true;
-        $result['article'] = $articleData;
+        $result['html'] = $articleModel->formatArticle($articleData);
 
         $this->response->noCache();
         $this->response->setContentType('application/json');
-        return $this->response->setJSON($articleData);
+        return $this->response->setJSON($result);
     }
 
     /**
@@ -131,4 +131,30 @@ class Article extends BaseController
         $this->response->setContentType('application/json');
         return $this->response->setJSON($result);
     }
+
+    /**
+     * 搜尋文章
+     * @return json
+     */
+    public function search()
+    {
+        $result = array('success' => false);
+        $data = $this->request->getJSON(true);
+        $keyword = $data['keyword'];
+
+        $articleModel = new ArticleModel();
+        $articleData = $articleModel->search($keyword);
+
+        foreach ($articleData as $key => $value) {
+            $articleData[$key]['image'] = base_url('api/casino/admin/article/image/show/' . $value['image-id']);
+        }
+
+        $result['success'] = true;
+        $result['data'] = $articleData;
+
+        $this->response->noCache();
+        $this->response->setContentType('application/json');
+        return $this->response->setJSON($result);
+    }
+    
 }

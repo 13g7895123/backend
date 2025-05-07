@@ -6,16 +6,15 @@ use CodeIgniter\Model;
 class M_Common extends Model
 {
     protected $db;
-    protected $table;
 
     public function __construct()
     {
         $this->db = \Config\Database::connect('promotion');  // 預設資料庫
     }
 
-    public function setTable($table)
+    public function setDatabase($database)
     {
-        $this->table = $table;
+        $this->db = \Config\Database::connect($database);
     }
 
     /**
@@ -27,7 +26,7 @@ class M_Common extends Model
      * @param array $join 查詢聯結
      * @return array
      */
-    public function getData($table, $where = [], $field = [], $queryMultiple = False, $join = [])
+    public function getData($table, $where = [], $field = [], $queryMultiple = False, $join = [], $sort = [])
     {
         $builder = $this->db->table($table);
 
@@ -53,6 +52,11 @@ class M_Common extends Model
             foreach ($join as $item){
                 $builder->join($item['table'], "{$item['table']}.{$item['field']} = {$table}.{$item['source_field']}");
             }
+        }
+
+        // 設置排序
+        if (!empty($sort)){
+            $builder->orderBy($sort['field'], $sort['direction']);
         }
 
         // 取得資料

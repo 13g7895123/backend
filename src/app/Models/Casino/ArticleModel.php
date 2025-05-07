@@ -71,4 +71,37 @@ class ArticleModel extends Model
 
         return false;
     }
+
+    /**
+     * 搜尋文章
+     * @param string $keyword 關鍵字
+     * @return array 文章資料   
+     */
+    public function search($keyword)
+    {
+        return $this->db->table('article_new')
+            ->like('title', $keyword)
+            ->orLike('tag', $keyword)
+            ->orLike('html', $keyword)
+            ->get() 
+            ->getResultArray();
+    }
+
+    /**
+     * 格式化文章
+     * @param array $article 文章資料
+     * @return array 格式化後的文章資料
+     */
+    public function formatArticle($article)
+    {
+        // print_r($article); die();
+
+        $html = '<h1 style="text-align: left">';
+        $html .= '<span style="font-size: 24px"><strong>'.$article['title'].'</strong></span>';
+        $html .= '</h1>';
+        $html .= '<img class="max-w-full h-auto" src="https://backend.mercylife.cc/api/casino/admin/article/image/show/'.$article['image-id'].'" alt="現金網體驗金.jpg">';
+        $html .= $article['html'];
+                
+        return $html;
+    }
 }
