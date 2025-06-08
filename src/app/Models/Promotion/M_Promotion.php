@@ -54,6 +54,27 @@ class M_Promotion extends Model
      */
     public function create($data)
     {
+        $where = array(
+            'user_id' => $data['user_id'],
+            'server' => $data['server'],
+            'DATE(created_at)' => date('Y-m-d'),
+        );
+        $promotionData = $this->M_Model_Common->getData('promotions', $where, [], false);
+
+        if (!empty($promotionData)){
+            $promotionId = $promotionData['id'];
+
+            $updateData = array(
+                'status' => 'standby',
+            );
+            $this->db->table('promotions')
+                ->where('id', $promotionId)
+                ->update($updateData);
+
+            // 如果已經有當天的推廣資料，則不再新增
+            return $promotionId;
+        }
+
         $this->db->table('promotions')
             ->insert($data);
 
@@ -276,7 +297,7 @@ class M_Promotion extends Model
             'promotion_id' => $promotionId,
             'status' => 'standby',
         );
-        $promotionDetails = $this->M_Model_Common->getData('promotion_items', $where, [], True);
+        $promotionDetails = $this->M_Model_Common->getData('promotion_items', $where, [], true);
         $tempLog['promotionDetails'] = $promotionDetails;
 
         // 更新各細項資料
@@ -326,31 +347,181 @@ class M_Promotion extends Model
                     // 達標送禮
                     if ($nowSchedule >= $server['limit_number']){
                         $playerData = $this->M_Model_Common->getData('player', ['id' => $userId]);
-                        // $isReward = $this->checkReward($playerData['id'], $serverCode);
+                        $isReward = $this->checkReward($playerData['id'], $serverCode, $_val['created_at']);
 
-                        // if ($isReward === false){
+                        if ($isReward === false){
                             $this->sendRewards($_val['id'], $serverCode, $playerData);
-                        // }
+                            $this->sendNotification($_val['id'], $auditResult, $_val['player_id']);
+                        }
                     }
+                }            
+            }
+        }
+
+        return $tempLog;
+    }
+
+    public function batchAuditV2($promotionId, $status)
+    {
+        // 引用Model
+        $M_Player = new M_Player();
+
+        // 推廣資料
+        $where = array(
+            'id' => $promotionId,
+            'status' => 'standby',
+        );
+        $promotionData = $this->M_Model_Common->getData('promotions', $where, [], true);
+
+        $playerIds = array_column($promotionData, 'user_id');
+        $playerIds = array_unique($playerIds); // 取得唯一的玩家ID
+        sort($playerIds); // 排序玩家ID
+
+        // 依使用者分類推廣
+        $data = array();
+        foreach ($playerIds as $_key => $_val){
+            foreach ($promotionData as $p_key => $p_val){
+                if ($_val == $p_val['user_id']){
+                    $data[$_val][] = $p_val['id'];
+                }
+            }
+        }
+
+        // 依使用者逐項推廣審核
+        foreach ($data as $_key => $_val){
+            // 各使用者的個別主項資料
+            foreach ($_val as $__key => $__val){
+                // 取得明細資料
+                $where = array(
+                    'promotion_id' => $__val,
+                    'status' => 'standby',
+                );
+                $promotionDetails = $this->M_Model_Common->getData('promotion_items', $where, [], true);
+
+                // 更新各細項資料
+                foreach ($promotionDetails as $_val){
+                    $this->M_PromotionItem->updateData(['status' => $status], ['id' => $_val['id']]);
                 }
 
-                // 發送通知
-                $playId = $_val['player_id'];
-                if ($counts[$playId] > 1){
-                    $lastIndex = array_search($playId, array_reverse($promotionId, true));
-                    $lastIndex = array_keys($promotionId)[$lastIndex];
+                // 取得主項資料
+                $where = array(
+                    'id' => $__val,
+                    'status' => 'standby',
+                );
+                $promotionData = $this->M_Model_Common->getData('promotions', $where, [], true);
 
-                    // 最後一筆才通知
-                    if ($_key == $lastIndex){
-                        $this->sendNotification($_val['id'], $auditResult, $playId);
-                    }
-                }else{
-                    $this->sendNotification($_val['id'], $auditResult, $playId);
-                }          
+                // 更新主項資料
+                foreach ($promotionData as $_key => $_val){
+                    $this->updateData($_val['id'], ['status' => $status]); 
+                }
+            }
 
-                // // 更新推廣結果
-                // $promotionStatus = ($auditResult === True) ? 'success' : 'failed';
-                // $this->updateData($_val['id'], ['status' => $promotionStatus]);                
+            // 確認使用者審核是否已完成
+            $playerId = $_key;
+            $promotionStatus = $M_Player->fetchPromotionStatus($playerId);
+
+            if ($promotionStatus['isFinished'] === true){
+                // 達標送禮
+                $playerData = $this->M_Model_Common->getData('player', ['id' => $playerId]);
+                $isReward = $this->checkReward($playerId, $promotionStatus['serverCode']);
+
+                if ($isReward === false){
+                    $this->sendRewards($_val[0], $promotionStatus['serverCode'], $playerData);
+                }
+            }
+        }
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $promotionId
+     * @param [type] $status
+     * @return void
+     */
+    public function batchAuditV3($promotionId, $status)
+    {
+        $tempLog = array();
+
+        // 取得未更新細項
+        $where = array(
+            'promotion_id' => $promotionId,
+            'status' => 'standby',
+        );
+        $promotionDetails = $this->M_Model_Common->getData('promotion_items', $where, [], true);
+
+        // 沒有資料不繼續動作
+        if (empty($promotionDetails)){
+            // 沒有需要更新的細項
+            return array('code' => 0);
+        }
+
+        $promotionDetailIds = array_column($promotionDetails, 'id');
+        $tempLog['promotionDetails'] = $promotionDetails;
+
+        // 更新各細項資料
+        $updateData = array('status' => $status);
+        $where = array('id' => $promotionDetailIds);
+        $this->M_PromotionItem->updateDataNew($updateData, $where);
+
+        // 更新主項資料
+        $this->db->table('promotions')
+            ->whereIn('id', $promotionId)
+            ->update($updateData);
+
+        // 取得更新後細項資料(必須為完成的)
+        $where = array(
+            'id' => $promotionDetailIds,
+            'status' => 'success',
+        );
+        $updatedPromotionDetails = $this->M_Model_Common->getData('promotion_items', $where, [], true);
+
+        if (empty($updatedPromotionDetails)){
+            // 更新後沒有完成的細項資料
+            return array('code' => 1);
+        }
+
+        $checkPromotionData = array();      // 確認用的資料(主資料對細項資料)
+        foreach ($promotionId as $_val){
+            $checkPromotionData[] = array(
+                'id' => $_val,
+                'detail' => array_filter($updatedPromotionDetails, function($item) use ($_val){
+                    return $item['promotion_id'] == $_val;
+                }),
+            );
+        }
+
+        // 主項目資料
+        $join = array(
+            array(
+                'table' => 'server',
+                'field' => 'code',
+                'source_field' => 'server',
+            ),
+            array(
+                'table' => 'player',
+                'field' => 'id',
+                'source_field' => 'user_id',
+            ),
+        );
+        $promotionData = $this->M_Model_Common->getData('promotions', ['promotions.id' => $promotionId], ['*', 'promotions.id', 'promotions.created_at'], true, $join);
+
+        foreach ($checkPromotionData as $_val){
+            $id = $_val['id'];
+
+            $filterData = array_filter($promotionData, function($item) use ($id){
+                return $item['id'] == $id;
+            });
+
+            $filterData = reset($filterData);
+
+            if (count($_val['detail']) >= $filterData['limit_number']){
+                $isReward = $this->checkReward($filterData['user_id'], $filterData['server'], $filterData['created_at']);
+
+                if ($isReward === false){
+                    $this->sendRewards($_val['id'], $filterData['server'], $filterData);
+                    $this->sendNotification($_val['id'], true, $filterData['user_id']);
+                }
             }
         }
 
@@ -496,29 +667,49 @@ class M_Promotion extends Model
      * @param string $serverCode 伺服器代碼
      * @return bool
      */
-    public function checkReward($playerId, $serverCode)
+    public function checkReward($playerId, $serverCode, $time=null)
     {
         $serverData = $this->M_Model_Common->getData('server', ['code' => $serverCode]);
         $frequency = $serverData['cycle'];
 
-        switch ($frequency) {
-            case 'daily':
-                $where = "DATE(created_at) = CURDATE()"; // 當日
-                break;    
-            case 'weekly':
-                $where = "YEARWEEK(created_at, 1) = YEARWEEK(CURDATE(), 1)"; // 當週
-                break;    
-            case 'monthly':
-                $where = "YEAR(created_at) = YEAR(CURDATE()) AND MONTH(created_at) = MONTH(CURDATE())"; // 當月
-                break;    
-            default:
-                return []; // 如果頻率無效，返回空陣列
+        $builder = $this->db->table('reward');
+
+        // 預設為現在時間
+        if (empty($time)) {
+            $time = date('Y-m-d H:i:s');
         }
 
-        $builder = $this->db->table('reward');
+        // 解析傳入時間
+        $timestamp = strtotime($time);
+        if ($timestamp === false) {
+            return []; // 無效時間格式
+        }
+
+        $date = date('Y-m-d', $timestamp);
+        $year = date('Y', $timestamp);
+        $month = date('m', $timestamp);
+        $week = date('oW', $timestamp); // o = ISO year, W = ISO week
+
+        switch ($frequency) {
+            case 'daily':
+                $builder->where('DATE(created_at)', $date);
+                break;
+
+            case 'weekly':
+                $builder->where("YEARWEEK(created_at, 1) = ", $week);  // 例如 202420
+                break;
+
+            case 'monthly':
+                $builder->where('YEAR(created_at)', $year);
+                $builder->where('MONTH(created_at)', $month);
+                break;
+
+            default:
+                return []; // 頻率無效
+        }
+
         $builder->where('player_id', $playerId);
         $builder->where('server_code', $serverCode);
-        $builder->where($where);
 
         $reward = $builder->get()->getRowArray();
 

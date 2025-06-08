@@ -2,14 +2,19 @@
 namespace App\Controllers\Casino;
 
 use App\Controllers\BaseController;
-use App\Models\Casino\SportsScoresModel;
 use App\Models\Casino\FileModel;
+use App\Models\Casino\ChessAndCardsModel;
 use App\Models\M_Common as M_Model_Common;
 
-class SportsScores extends BaseController
+/**
+ * 首頁棋牌遊戲
+ * 說明: 實際引用的是chess-and-cards-play-detail
+ */
+class ChessAndCards extends BaseController
 {
     protected $db;
     protected $FileModel;
+    protected $ChessAndCardsModel;
     protected $M_Model_Common;
 
     public function __construct()
@@ -17,9 +22,10 @@ class SportsScores extends BaseController
         error_reporting(E_ALL);
         ini_set('display_errors', 1);
 
+        $this->ChessAndCardsModel = new ChessAndCardsModel();
         $this->FileModel = new FileModel();
         $this->M_Model_Common = new M_Model_Common();
-        $this->M_Model_Common->setDatabase('casino');        
+        $this->M_Model_Common->setDatabase('casino');
     }
 
     public function index($id=null)
@@ -27,22 +33,24 @@ class SportsScores extends BaseController
         $result = array('success' => false);
         $where = [];
         $multiple = true;
-        $sort = ['field' => 'sort', 'direction' => 'ASC'];
+        $sort = array('show-home' => 'DESC', 'home-sort' => 'ASC');
 
+        // 編輯
         if ($id != null) {
             $where['id'] = $id;
             $multiple = false;
-            $sort = [];
         }
 
-        $data = $this->M_Model_Common->getData('sports-scores', $where, [], $multiple, [], $sort);
+        $data = $this->M_Model_Common->getData('chess-and-cards-play-detail', $where, [], $multiple, [], [], $sort);
 
         if (!empty($data) && $multiple === true) {
             foreach ($data as $_key => $_val) {
                 $data[$_key]['image'] = base_url() . 'api/casino/image/show/' . $_val['image-id'];
+                $data[$_key]['view-image'] = base_url() . 'api/casino/image/show/' . $_val['view-image-id'];
             }
         }
 
+        // 單筆資料不會有圖片
         $result['success'] = true;
         $result['data'] = $data;
 
@@ -56,8 +64,7 @@ class SportsScores extends BaseController
         $result = array('success' => false);
         $postData = $this->request->getJSON(true);
 
-        $SportsScoresModel = new SportsScoresModel();
-        $insertId = $SportsScoresModel->createData($postData);
+        $insertId = $this->ChessAndCardsModel->createData($postData);
 
         if ($insertId > 0) {
             $result['success'] = true;
@@ -73,9 +80,9 @@ class SportsScores extends BaseController
     {
         $result = array('success' => false);
         $postData = $this->request->getJSON(true);
-        
-        $SportsScoresModel = new SportsScoresModel();
-        $updateResult = $SportsScoresModel->updateData($postData);
+
+        $updateResult = $this->ChessAndCardsModel->updateData($postData);
+        // $updateResult = $this->ChessAndCardsModel->updateData($postData, true);
 
         if ($updateResult) {
             $result['success'] = true;
@@ -91,18 +98,17 @@ class SportsScores extends BaseController
     {
         $result = array('success' => false);
         $postData = $this->request->getJSON(true);
-
-        $SportsScoresModel = new SportsScoresModel();
-        $deleteResult = $SportsScoresModel->deleteData($postData['id']);
+        
+        $deleteResult = $this->ChessAndCardsModel->deleteData($postData['id']);
 
         if ($deleteResult) {
             // 更新排序
-            $SportsScoresModel->resetSort();
+            $this->ChessAndCardsModel->resetSort();
 
             $result['success'] = true;
             $result['msg'] = '刪除成功';
         }
-        
+
         $this->response->noCache();
         $this->response->setContentType('application/json');
         return $this->response->setJSON($result);
@@ -123,12 +129,14 @@ class SportsScores extends BaseController
         }
 
         $postData = $this->request->getPost();
+        $imageField = 'image-id';
+        $imageField = isset($postData['image-type']) && $postData['image-type'] == 'view' ? 'view-image-id' : 'image-id';
+
         $updateData = array(
             'id' => $postData['id'],
-            'image-id' => $fileId,
+            $imageField => $fileId,
         );
-        $SportsScoresModel = new SportsScoresModel();
-        $updateResult = $SportsScoresModel->updateData($updateData);
+        $updateResult = $this->ChessAndCardsModel->updateData($updateData);
 
         if ($updateResult) {
             $result['success'] = true;
@@ -144,11 +152,10 @@ class SportsScores extends BaseController
     {
         $result = array('success' => false);
         $postData = $this->request->getJSON(true);
+        
+        $sortResult = $this->ChessAndCardsModel->updateSort($postData['id'], $postData['type'], 'home-sort');
 
-        $sportsScoresModel = new SportsScoresModel();
-        $updateResult = $sportsScoresModel->updateSort($postData['id'], $postData['type']);
-
-        if ($updateResult) {
+        if ($sortResult) {
             $result['success'] = true;
             $result['msg'] = '排序成功';
         }

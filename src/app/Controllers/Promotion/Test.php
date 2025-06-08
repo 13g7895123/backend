@@ -3,8 +3,7 @@
 namespace App\Controllers\Promotion;
 
 use App\Controllers\BaseController;
-use App\Models\Promotion\M_CustomizedDb;
-use App\Models\Promotion\M_User;
+use App\Models\Promotion\MailModel;
 
 class Test extends BaseController
 {
@@ -54,22 +53,56 @@ class Test extends BaseController
 
     public function test()
     {
+        // print_r(123); die();
         // $M_User = new M_User();
         // $M_User->checkAccessToken('5l6pbvbm4adgtz9rrzug');
 
-        $code = 'tdb';
-        $M_CustomizedDb = new M_CustomizedDb($code);
-        print_r($M_CustomizedDb); die();
-        // // $insertData = array(
-        // //     'server_code' => $code,
-        // //     'table_name' => $M_CustomizedDb->getTable(),
-        // // );
-        
+        // $code = 'ga';
+        // $M_CustomizedDb = new M_CustomizedDb($code);
+        // $data = $M_CustomizedDb->fetchData();
 
-
-        // foreach ($M_CustomizedDb->getDbField() as $_val){
-        //     $insertData[$_val['field']] = $_val['value'];
+        // if (empty($data)){
+        //     return $this->response->setJSON([
+        //         'success' => false,
+        //         'msg' => 'No data found'
+        //     ]);
         // }
-        // $M_CustomizedDb->insertData($insertData);  
+
+        $db = \Config\Database::connect('promotion');
+
+        $promotionData = $db->table('promotions')
+            ->where('status', 'success')
+            ->where('created_at >=', '2025-06-06 00:00:00')
+            ->get()
+            ->getResultArray();
+
+        $wrongCount = 0;
+        $temp = array();
+        foreach ($promotionData as $_key => $_val) {
+            $rewardData = $db->table('reward')
+                ->join('player', 'player.id = reward.player_id')
+                ->where('reward.player_id', $_val['user_id'])
+                ->where('reward.server_code', $_val['server'])
+                ->where('reward.created_at >=', '2025-06-06 00:00:00')
+                ->orderBy('reward.created_at', 'DESC')
+                ->get()
+                ->getRowArray();
+
+            if (empty($rewardData)) {
+                // $temp[] = $_val;
+                // $wrongCount ++;
+
+                continue;
+            }
+
+            $promotionData[$_key]['reward_time'] = $rewardData['created_at'];
+            $promotionData[$_key]['user'] = $rewardData['username'];
+
+            if ($promotionData[$_key]['reward_time'] < $promotionData[$_key]['created_at']) {
+                $temp[] = $promotionData[$_key];
+            }
+        }
+
+        print_r($temp); die();
     }
 }

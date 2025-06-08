@@ -1,15 +1,17 @@
 <?php
-namespace App\Controllers\Casino;
+namespace App\Controllers\Casino\Common;
 
 use App\Controllers\BaseController;
-use App\Models\Casino\LotteryDrawModel;
 use App\Models\Casino\FileModel;
 use App\Models\M_Common as M_Model_Common;
 
-class LotteryDraw extends BaseController
+// 共用基礎Controller
+class CommonBaseController extends BaseController
 {
     protected $db;
-    protected $table;
+    protected $table = '';
+    protected $baseModelPath = 'App\\Models\\Casino\\';
+    protected $fullModelPath = '';
     protected $FileModel;
 
     public function __construct()
@@ -17,8 +19,20 @@ class LotteryDraw extends BaseController
         error_reporting(E_ALL);
         ini_set('display_errors', 1);
 
-        $this->table = 'lottery-draw';
+        $this->table = '';
         $this->FileModel = new FileModel();    
+    }
+
+    public function setTable($table)
+    {
+        $this->table = $table;
+    }
+
+    // 添加 pascalize 函數
+    private function pascalize($string)
+    {
+        // 將 kebab-case 轉換為 PascalCase
+        return str_replace(' ', '', ucwords(str_replace('-', ' ', $string)));
     }
 
     public function index($id=null)
@@ -34,13 +48,15 @@ class LotteryDraw extends BaseController
             $sort = [];
         }
 
-        $M_Model_Common =new M_Model_Common();
+        $M_Model_Common = new M_Model_Common();
         $M_Model_Common->setDatabase('casino');  
         $data = $M_Model_Common->getData($this->table, $where, [], $multiple, [], $sort);
 
         if (!empty($data) && $id == null) {
             foreach ($data as $_key => $_val) {
-                $data[$_key]['image'] = base_url() . 'api/casino/image/show/' . $_val['image-id'];
+                if (isset($_val['image-id']) && $_val['image-id'] != '') {
+                    $data[$_key]['image'] = base_url() . 'api/casino/image/show/' . $_val['image-id'];
+                }
             }
         }
 
@@ -57,8 +73,18 @@ class LotteryDraw extends BaseController
         $result = array('success' => false);
         $postData = $this->request->getJSON(true);
 
-        $LotteryDrawModel = new LotteryDrawModel();
-        $insertId = $LotteryDrawModel->createData($postData);
+        $modelClass = $this->baseModelPath . $this->pascalize($this->table) . 'Model';
+        // 檢查類是否存在
+        if (!class_exists($modelClass)) {
+            $result['msg'] = '無效的類型: ' . $modelClass;
+            $this->response->noCache();
+            $this->response->setContentType('application/json');
+            return $this->response->setJSON($result);
+        }
+
+        $model = model($modelClass);
+        $insertId = $model->createData($postData);
+        // $insertId = $model->createData($postData, true);
 
         if ($insertId > 0) {
             $result['success'] = true;
@@ -75,8 +101,17 @@ class LotteryDraw extends BaseController
         $result = array('success' => false);
         $postData = $this->request->getJSON(true);
         
-        $LotteryDrawModel = new LotteryDrawModel();
-        $updateResult = $LotteryDrawModel->updateData($postData);
+        $modelClass = $this->baseModelPath . $this->pascalize($this->table) . 'Model';  // 加上 Model 後綴
+        // 檢查類是否存在
+        if (!class_exists($modelClass)) {
+            $result['msg'] = '無效的類型: ' . $modelClass;
+            $this->response->noCache();
+            $this->response->setContentType('application/json');
+            return $this->response->setJSON($result);
+        }
+
+        $model = model($modelClass);
+        $updateResult = $model->updateData($postData);
 
         if ($updateResult) {
             $result['success'] = true;
@@ -93,12 +128,21 @@ class LotteryDraw extends BaseController
         $result = array('success' => false);
         $postData = $this->request->getJSON(true);
         
-        $LotteryDrawModel = new LotteryDrawModel();
-        $deleteResult = $LotteryDrawModel->deleteData($postData['id']);
+        $modelClass = $this->baseModelPath . $this->pascalize($this->table) . 'Model';  // 加上 Model 後綴
+        // 檢查類是否存在
+        if (!class_exists($modelClass)) {
+            $result['msg'] = '無效的類型: ' . $modelClass;
+            $this->response->noCache();
+            $this->response->setContentType('application/json');
+            return $this->response->setJSON($result);
+        }
+
+        $model = model($modelClass);
+        $deleteResult = $model->deleteData($postData['id']);
 
         if ($deleteResult) {
             // 更新排序
-            $LotteryDrawModel->resetSort();
+            $model->resetSort();
 
             $result['success'] = true;
             $result['msg'] = '刪除成功';
@@ -123,20 +167,28 @@ class LotteryDraw extends BaseController
             return $this->response->setJSON($result);
         }
 
-        $LotteryDrawModel = new LotteryDrawModel();
-        
+        $modelClass = $this->baseModelPath . $this->pascalize($this->table) . 'Model';  // 加上 Model 後綴
+        // 檢查類是否存在
+        if (!class_exists($modelClass)) {
+            $result['msg'] = '無效的類型: ' . $modelClass;
+            $this->response->noCache();
+            $this->response->setContentType('application/json');
+            return $this->response->setJSON($result);
+        }
+
         $postData = $this->request->getPost();
         $updateData = array(
             'id' => $postData['id'],
             'image-id' => $fileId,
         );
-        $updateResult = $LotteryDrawModel->updateData($updateData);
+        $model = model($modelClass);
+        $updateResult = $model->updateData($updateData);
 
         if ($updateResult) {
             $result['success'] = true;
             $result['msg'] = '上傳成功';
         }
-        
+
         $this->response->noCache();
         $this->response->setContentType('application/json');
         return $this->response->setJSON($result);
@@ -147,8 +199,17 @@ class LotteryDraw extends BaseController
         $result = array('success' => false);
         $postData = $this->request->getJSON(true);
         
-        $LotteryDrawModel = new LotteryDrawModel();
-        $sortResult = $LotteryDrawModel->updateSort($postData['id'], $postData['type']);
+        $modelClass = $this->baseModelPath . $this->pascalize($this->table) . 'Model';  // 加上 Model 後綴
+        // 檢查類是否存在
+        if (!class_exists($modelClass)) {
+            $result['msg'] = '無效的類型: ' . $modelClass;
+            $this->response->noCache();
+            $this->response->setContentType('application/json');
+            return $this->response->setJSON($result);
+        }
+
+        $model = model($modelClass);
+        $sortResult = $model->updateSort($postData['id'], $postData['type']);
 
         if ($sortResult) {
             $result['success'] = true;
@@ -159,5 +220,4 @@ class LotteryDraw extends BaseController
         $this->response->setContentType('application/json');
         return $this->response->setJSON($result);
     }
-    
 }

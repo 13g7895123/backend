@@ -4,7 +4,7 @@ namespace App\Models\Casino\Common;
 use CodeIgniter\Model;
 use App\Models\M_Common as M_Model_Common;
 
-class BaseModel extends Model
+class BaseDetailModel extends Model
 {
     protected $db;
     protected $table;
@@ -22,23 +22,20 @@ class BaseModel extends Model
         $this->table = $table;
     }
 
+    /**
+     * 新增資料
+     * @param array $data
+     * @param bool $isTest  是否測試(顯示SQL)
+     * @return int
+     */
     public function createData(array $data, bool $isTest = false)
     {
         // 最新排序
-        $fetchData = $this->M_Model_Common->getData($this->table, [], [], true);
-        $maxSort = (empty($fetchData)) ? 0 : max(array_column($fetchData, 'sort'));
-        $newSort = $maxSort + 1;
+        $lastSort = $this->fetchLastSort($data['data-id']);
+        $data['sort'] = $lastSort + 1;
 
-        $data['sort'] = $newSort;
         $data['image-id'] = 0;          // 沒有圖片預設ID給零
 
-        // 確認資料表欄位
-        foreach ($data as $key => $value) {
-            if (!$this->checkFieldExist($key)) {
-                unset($data[$key]);
-            }
-        }
-        
         if ($isTest) {
             $test = array('data' => $data);
 
@@ -51,12 +48,14 @@ class BaseModel extends Model
             print_r($test); die();
         }
 
-        $this->db->table($this->table)->insert($data);
+        // 新增資料
+        $this->db->table($this->table)
+            ->insert($data);
 
         return $this->db->insertID();
     }
 
-    public function updateData(array $data, bool $isTest = false)
+    public function updateData(array $data)
     {
         // 確認資料存在
         $scoreData = $this->M_Model_Common->getData($this->table, ['id' => $data['id']], [], false);
@@ -65,24 +64,9 @@ class BaseModel extends Model
             return false;
         }
 
-        // 移除ID
+        // 更新資料
         $updateData = $data;
         unset($updateData['id']);
-
-        if ($isTest) {
-            $test = array('updateData' => $updateData);
-
-            $sql = $this->db->table($this->table)
-                ->set($updateData)
-                ->where('id', $data['id'])
-                ->getCompiledUpdate();
-
-            $test['sql'] = $sql;
-
-            print_r($test); die();
-        }
-
-        // 更新資料
         $this->db->table($this->table)->where('id', $data['id'])->update($updateData);
 
         return true;
@@ -112,41 +96,46 @@ class BaseModel extends Model
         return true;
     }
     
-    public function updateSort($id, $operation, $field = 'sort')
+    public function updateSort($id, $operation)
     {
+        // 取原資料父層ID
+        $fetchData = $this->M_Model_Common->getData($this->table, ['id' => $id], [], false);
+        $dataId = $fetchData['data-id'];
+        $where = array('data-id' => $dataId);
+
         $sort = array(
-            'field' => $field,
+            'field' => 'sort',
             'direction' => 'ASC',
         );
-        $fetchData = $this->M_Model_Common->getData($this->table, [], [], true, [], $sort);
+        $fetchData = $this->M_Model_Common->getData($this->table, $where, [], true, [], $sort);
 
         // 要更新的項目
         $target = array(
             'target' => array(
                 'id' => $id,
-                $field => null
+                'sort' => null
             ),
             'another' => array(
                 'id' => null,
-                $field => null
+                'sort' => null
             )
         );
 
         // 找出目標排序
         foreach ($fetchData as $_val) {
             if ($_val['id'] == $id) {
-                $nowSort = $_val[$field];
+                $nowSort = $_val['sort'];
                 $newSort = ($operation == 'plus') ? $nowSort + 1 : $nowSort - 1;
-                $target['target'][$field] = $newSort;
+                $target['target']['sort'] = $newSort;
             }
         }
 
         // 計算另一筆資料的排序
-        $target['another'][$field] = ($operation == 'minus') ? $target['target'][$field] + 1 : $target['target'][$field] - 1;
+        $target['another']['sort'] = ($operation == 'minus') ? $target['target']['sort'] + 1 : $target['target']['sort'] - 1;
 
         // 找出另一筆資料的ID
         foreach ($fetchData as $_val) {
-            if ($_val[$field] == $target['target'][$field]) {
+            if ($_val['sort'] == $target['target']['sort']) {
                 $target['another']['id'] = $_val['id'];
             }
         }
@@ -156,11 +145,11 @@ class BaseModel extends Model
             ->updateBatch([
                 [
                     'id' => $target['target']['id'],
-                    $field => $target['target'][$field]
+                    'sort' => $target['target']['sort']
                 ],
                 [
                     'id' => $target['another']['id'], 
-                    $field => $target['another'][$field]
+                    'sort' => $target['another']['sort']
                 ]
             ], 'id');
 
@@ -170,13 +159,13 @@ class BaseModel extends Model
     /**
      * 重置排序
      */
-    public function resetSort()
+    public function resetSort($dataId)
     {
         $sort = array(
             'field' => 'sort',
             'direction' => 'ASC',
         );
-        $fetchData = $this->M_Model_Common->getData($this->table, [], [], true, [], $sort);
+        $fetchData = $this->M_Model_Common->getData($this->table, ['data-id' => $dataId], [], true, [], $sort);
 
         $sort = 1;
         $updateData = array();
@@ -202,13 +191,14 @@ class BaseModel extends Model
         return true;
     }
 
-    /**
-     * 確認資料表欄位
-     * @param string $field 欄位名稱
-     * @return bool 是否存在
-     */
-    public function checkFieldExist($field)
+    private function fetchLastSort($dataId)
     {
-        return $this->db->fieldExists($field, $this->table);
+        $data = $this->db->table($this->table)
+            ->where('data-id', $dataId)
+            ->select('MAX(sort) as last_sort')
+            ->get()
+            ->getRowArray();
+
+        return $data['last_sort'] ?? 0;
     }
 }

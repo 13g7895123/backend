@@ -13,6 +13,7 @@ class FileModel extends Model
     {
         $this->db = \Config\Database::connect('casino');  // 預設資料庫
         $this->M_Model_Common = new M_Model_Common();
+        $this->M_Model_Common->setDatabase('casino');
     }
 
     /**

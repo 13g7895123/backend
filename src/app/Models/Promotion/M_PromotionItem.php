@@ -58,6 +58,21 @@ class M_PromotionItem extends Model
             ->update($data);
     }
 
+    public function updateDataNew($data, $where){
+        $builder = $this->db->table('promotion_items');
+
+        foreach ($where as $_key => $_val){
+            if (is_array($_val)){
+                $builder->whereIn($_key, $_val);
+                continue;
+            }
+
+            $builder->where($_key, $_val);
+        }
+
+        $builder->update($data);
+    }
+
     /**
      * 刪除推廣項目
      * @param int $promotionId 推廣Id

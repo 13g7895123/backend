@@ -3,11 +3,11 @@
 namespace App\Models\Casino;
 use App\Models\Casino\Common\BaseDetailModel;
 
-class ElectronicGamePlayDetailModel extends BaseDetailModel
+class InfoDetailModel extends BaseDetailModel
 {
     public function __construct()
     {
         parent::__construct();
-        $this->setTable('electronic-game-play-detail');
+        $this->setTable('info_detail');
     }
 }

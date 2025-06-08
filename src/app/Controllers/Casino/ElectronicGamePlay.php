@@ -3,39 +3,60 @@ namespace App\Controllers\Casino;
 
 use App\Controllers\BaseController;
 use App\Models\Casino\ElectronicGamePlayModel;
+use App\Models\Casino\FileModel;
 use App\Models\M_Common as M_Model_Common;
 
 class ElectronicGamePlay extends BaseController
 {
     protected $db;
-    protected $ElectronicGamePlayModel;
-    protected $M_Model_Common;
+    protected $table;
+    protected $FileModel;
 
     public function __construct()
     {
         error_reporting(E_ALL);
         ini_set('display_errors', 1);
 
-        $this->ElectronicGamePlayModel = new ElectronicGamePlayModel();
-        $this->M_Model_Common = new M_Model_Common();
-        $this->db = \Config\Database::connect('casino');
+        $this->table = 'electronic-game-play';
+        $this->FileModel = new FileModel();    
     }
 
     public function index($id=null)
     {
         $result = array('success' => false);
-        $postData = $this->request->getJSON(true);
-        // $playId = $postData['play_id'];
-        $id = isset($postData['id']) ? $postData['id'] : null;
+        $where = [];
+        $multiple = true;
+        $sort = ['field' => 'sort', 'direction' => 'ASC'];
 
-        // print_r($postData); die();
-
-        $data = $this->ElectronicGamePlayModel->fetchData($id);
-
-        if (!empty($data)) {
-            $result['success'] = true;
-            $result['data'] = $data;
+        if ($id != null) {
+            $where['id'] = $id;
+            $multiple = false;
+            $sort = [];
         }
+
+        $M_Model_Common =new M_Model_Common();
+        $M_Model_Common->setDatabase('casino');  
+        $data = $M_Model_Common->getData($this->table, $where, [], $multiple, [], $sort);
+
+        if (!empty($data) && $id == null) {
+            foreach ($data as $_key => $_val) {
+                $data[$_key]['image'] = base_url() . 'api/casino/image/show/' . $_val['image-id'];
+                
+                $games = array();
+                $detail = $M_Model_Common->getData('electronic-game-play-detail', ['data-id' => $_val['id']], [], true);
+                foreach ($detail as $d_val) {
+                    $games[] = array(
+                        'name' => $d_val['name'],
+                        'link' => $d_val['link'],
+                        'image' => base_url() . 'api/casino/image/show/' . $d_val['image-id'],
+                    );
+                }
+                $data[$_key]['games'] = $games;
+            }
+        }
+
+        $result['success'] = true;
+        $result['data'] = $data;
 
         $this->response->noCache();
         $this->response->setContentType('application/json');
@@ -48,7 +69,8 @@ class ElectronicGamePlay extends BaseController
         $postData = $this->request->getJSON(true);
 
         // 新增資料
-        $insertId = $this->ElectronicGamePlayModel->createData($postData);
+        $ElectronicGamePlayModel = new ElectronicGamePlayModel();
+        $insertId = $ElectronicGamePlayModel->createData($postData);
 
         if ($insertId > 0) {
             $result['success'] = true;
@@ -66,11 +88,84 @@ class ElectronicGamePlay extends BaseController
         $postData = $this->request->getJSON(true);
         
         // 更新資料
-        $updateResult = $this->ElectronicGamePlayModel->updateData($postData);
+        $ElectronicGamePlayModel = new ElectronicGamePlayModel();
+        $updateResult = $ElectronicGamePlayModel->updateData($postData);
 
         if ($updateResult === true) {
             $result['success'] = true;
             $result['msg'] = '更新成功';
+        }
+
+        $this->response->noCache();
+        $this->response->setContentType('application/json');
+        return $this->response->setJSON($result);
+    }
+
+    public function delete()
+    {
+        $result = array('success' => false);
+        $postData = $this->request->getJSON(true);
+        
+        $electronicGamePlayModel = new ElectronicGamePlayModel();
+        $deleteResult = $electronicGamePlayModel->deleteData($postData['id']);
+
+        if ($deleteResult) {
+            // 更新排序
+            $electronicGamePlayModel->resetSort();
+
+            $result['success'] = true;
+            $result['msg'] = '刪除成功';
+        }
+
+        $this->response->noCache();
+        $this->response->setContentType('application/json');
+        return $this->response->setJSON($result);        
+    }
+
+    public function upload()
+    {
+        $result = array('success' => false);
+        $file = $this->request->getFile('file');
+        $fileId = $this->FileModel->saveFile($file, 'images/casino');
+
+        if ($fileId === false) {
+            $result['msg'] = '上傳失敗';
+
+            $this->response->noCache();
+            $this->response->setContentType('application/json');
+            return $this->response->setJSON($result);
+        }
+
+        $ElectronicGamePlayModel = new ElectronicGamePlayModel();
+
+        $postData = $this->request->getPost();
+        $updateData = array(
+            'id' => $postData['id'],
+            'image-id' => $fileId,
+        );
+        $updateResult = $ElectronicGamePlayModel->updateData($updateData);
+
+        if ($updateResult) {
+            $result['success'] = true;
+            $result['msg'] = '上傳成功';
+        }
+        
+        $this->response->noCache();
+        $this->response->setContentType('application/json');
+        return $this->response->setJSON($result);
+    }
+
+    public function sort()
+    {
+        $result = array('success' => false);
+        $postData = $this->request->getJSON(true);
+        
+        $ElectronicGamePlayModel = new ElectronicGamePlayModel();
+        $sortResult = $ElectronicGamePlayModel->updateSort($postData['id'], $postData['type']);
+
+        if ($sortResult) {
+            $result['success'] = true;
+            $result['msg'] = '排序成功';
         }
 
         $this->response->noCache();

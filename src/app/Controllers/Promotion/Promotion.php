@@ -86,6 +86,7 @@ class Promotion extends BaseController
 
             $server = $this->M_Common->getData('server', ['code' => $data[$_key]['server']]);
             if (!empty($server)){
+                $data[$_key]['name'] = $server['name'];
                 $data[$_key]['require_character'] = $server['require_character'];
             }
         }
@@ -152,7 +153,9 @@ class Promotion extends BaseController
         $status = $postData['status'];
 
         $M_Promotion = new M_Promotion();
-        $temp = $M_Promotion->batchAudit($promotionId, $status);
+        // $temp = $M_Promotion->batchAudit($promotionId, $status);
+        // $temp = $M_Promotion->batchAuditV2($promotionId, $status);
+        $temp = $M_Promotion->batchAuditV3($promotionId, $status);
 
         $result = array(
             'success' => True,

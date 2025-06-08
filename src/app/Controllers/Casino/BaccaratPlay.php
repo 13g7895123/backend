@@ -1,25 +1,24 @@
-<?
+<?php
 namespace App\Controllers\Casino;
 
 use App\Controllers\BaseController;
-use App\Models\Casino\SportsScoresModel;
+use App\Models\Casino\BaccaratPlayModel;
 use App\Models\Casino\FileModel;
 use App\Models\M_Common as M_Model_Common;
 
-class SportsScores extends BaseController
+class BaccaratPlay extends BaseController
 {
     protected $db;
+    protected $table;
     protected $FileModel;
-    protected $M_Model_Common;
 
     public function __construct()
     {
         error_reporting(E_ALL);
         ini_set('display_errors', 1);
 
-        $this->FileModel = new FileModel();
-        $this->M_Model_Common = new M_Model_Common();
-        $this->M_Model_Common->setDatabase('casino');        
+        $this->table = 'baccarat-play';
+        $this->FileModel = new FileModel();    
     }
 
     public function index($id=null)
@@ -35,11 +34,14 @@ class SportsScores extends BaseController
             $sort = [];
         }
 
-        $data = $this->M_Model_Common->getData('sports-scores', $where, [], $multiple, [], $sort);
+        $M_Model_Common = new M_Model_Common();
+        $M_Model_Common->setDatabase('casino');  
+        $data = $M_Model_Common->getData($this->table, $where, [], $multiple, [], $sort);
 
-        if (!empty($data) && $multiple === true) {
+        if (!empty($data) && $id == null) {
             foreach ($data as $_key => $_val) {
                 $data[$_key]['image'] = base_url() . 'api/casino/image/show/' . $_val['image-id'];
+                $data[$_key]['logo-image'] = base_url() . 'api/casino/image/show/' . $_val['logo-image-id'];
             }
         }
 
@@ -56,8 +58,8 @@ class SportsScores extends BaseController
         $result = array('success' => false);
         $postData = $this->request->getJSON(true);
 
-        $SportsScoresModel = new SportsScoresModel();
-        $insertId = $SportsScoresModel->createData($postData);
+        $BaccaratPlayModel = new BaccaratPlayModel();
+        $insertId = $BaccaratPlayModel->createData($postData);
 
         if ($insertId > 0) {
             $result['success'] = true;
@@ -74,8 +76,8 @@ class SportsScores extends BaseController
         $result = array('success' => false);
         $postData = $this->request->getJSON(true);
         
-        $SportsScoresModel = new SportsScoresModel();
-        $updateResult = $SportsScoresModel->updateData($postData);
+        $BaccaratPlayModel = new BaccaratPlayModel();
+        $updateResult = $BaccaratPlayModel->updateData($postData);
 
         if ($updateResult) {
             $result['success'] = true;
@@ -91,23 +93,23 @@ class SportsScores extends BaseController
     {
         $result = array('success' => false);
         $postData = $this->request->getJSON(true);
-
-        $SportsScoresModel = new SportsScoresModel();
-        $deleteResult = $SportsScoresModel->deleteData($postData['id']);
+        
+        $BaccaratPlayModel = new BaccaratPlayModel();
+        $deleteResult = $BaccaratPlayModel->deleteData($postData['id']);
 
         if ($deleteResult) {
             // 更新排序
-            $SportsScoresModel->resetSort();
+            $BaccaratPlayModel->resetSort();
 
             $result['success'] = true;
             $result['msg'] = '刪除成功';
         }
-        
+
         $this->response->noCache();
         $this->response->setContentType('application/json');
         return $this->response->setJSON($result);
     }
-
+    
     public function upload()
     {
         $result = array('success' => false);
@@ -127,14 +129,14 @@ class SportsScores extends BaseController
             'id' => $postData['id'],
             'image-id' => $fileId,
         );
-        $SportsScoresModel = new SportsScoresModel();
-        $updateResult = $SportsScoresModel->updateData($updateData);
+        $baccaratPlayModel = new BaccaratPlayModel();
+        $updateResult = $baccaratPlayModel->updateData($updateData);
 
         if ($updateResult) {
             $result['success'] = true;
             $result['msg'] = '上傳成功';
         }
-        
+
         $this->response->noCache();
         $this->response->setContentType('application/json');
         return $this->response->setJSON($result);
@@ -144,11 +146,11 @@ class SportsScores extends BaseController
     {
         $result = array('success' => false);
         $postData = $this->request->getJSON(true);
+        
+        $BaccaratPlayModel = new BaccaratPlayModel();
+        $sortResult = $BaccaratPlayModel->updateSort($postData['id'], $postData['type']);
 
-        $sportsScoresModel = new SportsScoresModel();
-        $updateResult = $sportsScoresModel->updateSort($postData['id'], $postData['type']);
-
-        if ($updateResult) {
+        if ($sortResult) {
             $result['success'] = true;
             $result['msg'] = '排序成功';
         }
@@ -157,4 +159,5 @@ class SportsScores extends BaseController
         $this->response->setContentType('application/json');
         return $this->response->setJSON($result);
     }
+    
 }

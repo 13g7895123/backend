@@ -174,4 +174,22 @@ class PromotionItem extends BaseController
         $this->response->setContentType('application/json');
         return $this->response->setJSON($result);
     }
+
+    public function checkUrl()
+    {
+        $postData = $this->request->getJson(True);
+        $url = $postData['url'];
+
+        $checkResult = $this->M_PromotionItem->checkUrl($url);
+
+        $result = array(
+            'success' => True,
+            'msg' => '確認成功',
+            'isExist' => $checkResult,
+        );
+
+        $this->response->noCache();
+        $this->response->setContentType('application/json');
+        return $this->response->setJSON($result);
+    }
 }

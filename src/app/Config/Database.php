@@ -45,16 +45,37 @@ class Database extends Config
     ];
 
     /* 推廣 */
+    // public $promotion = [
+    //     'DSN'      => '',
+    //     'hostname' => '139.162.15.125',
+    //     'username' => 'promotion_user',
+    //     'password' => 'v94176w6',
+    //     'database' => 'promotion',
+    //     'DBDriver' => 'MySQLi',
+    //     'DBPrefix' => '',
+    //     'pConnect' => false,
+    //     'DBDebug'  => (ENVIRONMENT !== 'production'),
+    //     'charset'  => 'utf8',
+    //     'DBCollat' => 'utf8_general_ci',
+    //     'swapPre'  => '',
+    //     'encrypt'  => false,
+    //     'compress' => false,
+    //     'strictOn' => false,
+    //     'failover' => [],
+    //     'port'     => 9701,
+    // ];
+
+    /* 推廣測試 */
     public $promotion = [
         'DSN'      => '',
         'hostname' => '139.162.15.125',
         'username' => 'promotion_user',
         'password' => 'v94176w6',
-        'database' => 'promotion',
+        'database' => 'promotion-test',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,
-        'DBDebug'  => (ENVIRONMENT !== 'production'),
+        'DBDebug'  => true,
         'charset'  => 'utf8',
         'DBCollat' => 'utf8_general_ci',
         'swapPre'  => '',
@@ -62,7 +83,7 @@ class Database extends Config
         'compress' => false,
         'strictOn' => false,
         'failover' => [],
-        'port'     => 9701,
+        'port'     => 9715,
     ];
 
     // 娛樂城

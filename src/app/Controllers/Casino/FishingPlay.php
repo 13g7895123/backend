@@ -1,25 +1,24 @@
-<?
+<?php
 namespace App\Controllers\Casino;
 
 use App\Controllers\BaseController;
-use App\Models\Casino\SportsScoresModel;
+use App\Models\Casino\FishingPlayModel;
 use App\Models\Casino\FileModel;
 use App\Models\M_Common as M_Model_Common;
 
-class SportsScores extends BaseController
+class FishingPlay extends BaseController
 {
     protected $db;
+    protected $table;
     protected $FileModel;
-    protected $M_Model_Common;
 
     public function __construct()
     {
         error_reporting(E_ALL);
         ini_set('display_errors', 1);
 
-        $this->FileModel = new FileModel();
-        $this->M_Model_Common = new M_Model_Common();
-        $this->M_Model_Common->setDatabase('casino');        
+        $this->table = 'fishing-play';
+        $this->FileModel = new FileModel();    
     }
 
     public function index($id=null)
@@ -35,9 +34,11 @@ class SportsScores extends BaseController
             $sort = [];
         }
 
-        $data = $this->M_Model_Common->getData('sports-scores', $where, [], $multiple, [], $sort);
+        $M_Model_Common =new M_Model_Common();
+        $M_Model_Common->setDatabase('casino');  
+        $data = $M_Model_Common->getData($this->table, $where, [], $multiple, [], $sort);
 
-        if (!empty($data) && $multiple === true) {
+        if (!empty($data) && $id == null) {
             foreach ($data as $_key => $_val) {
                 $data[$_key]['image'] = base_url() . 'api/casino/image/show/' . $_val['image-id'];
             }
@@ -56,8 +57,8 @@ class SportsScores extends BaseController
         $result = array('success' => false);
         $postData = $this->request->getJSON(true);
 
-        $SportsScoresModel = new SportsScoresModel();
-        $insertId = $SportsScoresModel->createData($postData);
+        $FishingPlayModel = new FishingPlayModel();
+        $insertId = $FishingPlayModel->createData($postData);
 
         if ($insertId > 0) {
             $result['success'] = true;
@@ -74,8 +75,8 @@ class SportsScores extends BaseController
         $result = array('success' => false);
         $postData = $this->request->getJSON(true);
         
-        $SportsScoresModel = new SportsScoresModel();
-        $updateResult = $SportsScoresModel->updateData($postData);
+        $FishingPlayModel = new FishingPlayModel();
+        $updateResult = $FishingPlayModel->updateData($postData);
 
         if ($updateResult) {
             $result['success'] = true;
@@ -91,23 +92,23 @@ class SportsScores extends BaseController
     {
         $result = array('success' => false);
         $postData = $this->request->getJSON(true);
-
-        $SportsScoresModel = new SportsScoresModel();
-        $deleteResult = $SportsScoresModel->deleteData($postData['id']);
+        
+        $FishingPlayModel = new FishingPlayModel();
+        $deleteResult = $FishingPlayModel->deleteData($postData['id']);
 
         if ($deleteResult) {
             // 更新排序
-            $SportsScoresModel->resetSort();
+            $FishingPlayModel->resetSort();
 
             $result['success'] = true;
             $result['msg'] = '刪除成功';
         }
-        
+
         $this->response->noCache();
         $this->response->setContentType('application/json');
         return $this->response->setJSON($result);
     }
-
+    
     public function upload()
     {
         $result = array('success' => false);
@@ -127,8 +128,8 @@ class SportsScores extends BaseController
             'id' => $postData['id'],
             'image-id' => $fileId,
         );
-        $SportsScoresModel = new SportsScoresModel();
-        $updateResult = $SportsScoresModel->updateData($updateData);
+        $fishingPlayModel = new FishingPlayModel();
+        $updateResult = $fishingPlayModel->updateData($updateData);
 
         if ($updateResult) {
             $result['success'] = true;
@@ -144,11 +145,11 @@ class SportsScores extends BaseController
     {
         $result = array('success' => false);
         $postData = $this->request->getJSON(true);
+        
+        $FishingPlayModel = new FishingPlayModel();
+        $sortResult = $FishingPlayModel->updateSort($postData['id'], $postData['type']);
 
-        $sportsScoresModel = new SportsScoresModel();
-        $updateResult = $sportsScoresModel->updateSort($postData['id'], $postData['type']);
-
-        if ($updateResult) {
+        if ($sortResult) {
             $result['success'] = true;
             $result['msg'] = '排序成功';
         }
@@ -157,4 +158,5 @@ class SportsScores extends BaseController
         $this->response->setContentType('application/json');
         return $this->response->setJSON($result);
     }
+    
 }

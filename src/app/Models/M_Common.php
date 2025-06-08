@@ -26,7 +26,7 @@ class M_Common extends Model
      * @param array $join 查詢聯結
      * @return array
      */
-    public function getData($table, $where = [], $field = [], $queryMultiple = False, $join = [], $sort = [])
+    public function getData($table, $where = [], $field = [], $queryMultiple = False, $join = [], $sort = [], $newSort = [], $isTest = false)
     {
         $builder = $this->db->table($table);
 
@@ -57,9 +57,24 @@ class M_Common extends Model
         // 設置排序
         if (!empty($sort)){
             $builder->orderBy($sort['field'], $sort['direction']);
+            // foreach ($sort as $key => $val){
+            //     $builder->orderBy($key, $val);
+            // }
+        }
+
+        // 新的排序
+        if (!empty($newSort)){
+            foreach ($newSort as $_key => $_val){
+                $builder->orderBy($_key, $_val);
+            }
+        }
+
+        if ($isTest){
+            print_r($builder->getCompiledSelect()); die();
         }
 
         // 取得資料
+        // print_r($builder->getCompiledSelect()); die();
         $data = ($queryMultiple === true) ? $builder->get()->getResultArray() : $builder->get()->getRowArray();
 
         return $data;
